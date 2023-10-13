@@ -25,11 +25,11 @@ public class ImportentValue {
 	protected static final Font titleKostar = new Font("Kostar", Font.PLAIN, 30);
 	
 	protected static final Color OneColor = Color.white;
-	protected static final Color TwoColor = new Color(50, 150, 255);
+	protected static final Color TwoColor = new Color(255, 60, 220);
 	protected static final Color ThreeColor = Color.green;
 	protected static final Color FourColor = Color.cyan;
 	protected static final Color HColor = new Color(255, 40, 0);
-	protected static final Color XColor = Color.magenta; //new Color(124, 165, 133);
+	protected static final Color XColor = new Color(50, 150, 255);
 	protected static final Color ZColor = Color.orange;
 	
 	/*	컴포넌트 저장	*/
