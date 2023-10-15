@@ -2,14 +2,10 @@ package demon_slayer;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -50,8 +46,7 @@ public class CombinationSelectWindow extends JFrame {
 									"./images/Char/Z/chaZ_Kyojuro.png" };
 
 	public CombinationSelectWindow(String id) {
-		Container container = getRootPane().getContentPane();
-		impV.activeContainer = container;	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
 		
 		setUndecorated(true);	// 테두리 삭제
 		setResizable(false);	// 크기 조절 여부
@@ -88,7 +83,7 @@ public class CombinationSelectWindow extends JFrame {
 		backButton.setFocusPainted(false);						// 선택 됐을 때 생기는 테두리 없애기
 		backButton.setPreferredSize(new Dimension(200, 30));	//크기 설정
 		backButton.setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));	// 테두리
-		backButton.setBounds(75, impV.window_height - 40, 200, 30);
+		backButton.setBounds(80, impV.window_height - 55, 200, 30);
 
 		/* 뒤로가기 버튼 기능 구현 */
 		backButton.addActionListener(new ActionListener() {
@@ -210,6 +205,7 @@ public class CombinationSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Thread sideWindow = new Thread(new CombinationSideWindow(name));
+				repaint();
 				sideWindow.start();
 			}
 		});
@@ -222,13 +218,6 @@ public class CombinationSelectWindow extends JFrame {
 			}
 		});
 		
-		mainButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				repaint();
-			}
-		});
-
 		cardPanel.add(imgLabel);
 		cardPanel.add(imgText);
 		cardPanel.add(mainButton);

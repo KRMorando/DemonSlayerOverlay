@@ -89,7 +89,8 @@ public class MainWindow extends JFrame {
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						System.exit(0);
+						new MissionWindow();
+						setVisible(false);
 					}
 				});
 				break;

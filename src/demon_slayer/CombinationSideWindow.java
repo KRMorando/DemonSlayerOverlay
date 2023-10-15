@@ -2,19 +2,11 @@ package demon_slayer;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,11 +16,11 @@ import javax.swing.border.TitledBorder;
 
 public class CombinationSideWindow extends JFrame implements Runnable {
 	ImportentValue impV = new ImportentValue();
-	JPanel mainPanel, levelPanel, explainPanel;
-	JPanel[] lvPanel = {new JPanel(), new JPanel(), new JPanel()};
-//							3		/		2		/	1
-	JLabel titleLabel;
-	Border bf;
+	private JPanel mainPanel, levelPanel, explainPanel;
+	private JPanel[] lvPanel = {new JPanel(), new JPanel(), new JPanel()};
+//									3		/		2		/	1
+	private JLabel titleLabel;
+	private Border bf;
 	
 	protected static Thread runningThread;
 	private static String name;
@@ -314,32 +306,32 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		
 		cardPanel.setLayout(null);
 		cardPanel.setBackground(new Color(0, 0, 0, 0));	//배경 투명
-		cardPanel.setSize(width, height);					//width, height
+		cardPanel.setSize(width, height);				//width, height
 
 		imgLabel.setText("");
-		imgLabel.setBackground(new Color(0, 0, 0, 0));		// 배경 투명
-		imgLabel.setBounds(0, 0, width, height - 25); 		// x, y, width, height
+		imgLabel.setBackground(new Color(0, 0, 0, 0));	// 배경 투명
+		imgLabel.setBounds(0, 0, width, height - 25); 	// x, y, width, height
 
-		imgText.setText(name); 								// 버튼 이름
-		imgText.setBackground(new Color(0, 0, 0, 0));		// 배경색
+		imgText.setText(name); 							// 버튼 이름
+		imgText.setBackground(new Color(0, 0, 0, 0));	// 배경색
 		imgText.setFont(impV.smallKostar); 				// 폰트
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
-		imgText.setBounds(0, height - 40, width, 35);		// x, y, width, height
+		imgText.setBounds(0, height - 40, width, 35);	// x, y, width, height
 		if(rank == "1")
-			imgText.setForeground(impV.OneColor);				//글씨 색상
+			imgText.setForeground(impV.OneColor);	//글씨 색상
 		else if(rank == "2")
 			imgText.setForeground(impV.TwoColor);	//글씨 색상
 		else if(rank == "3")
-			imgText.setForeground(impV.ThreeColor);				//글씨 색상
+			imgText.setForeground(impV.ThreeColor);	//글씨 색상
 		else if(rank == "4")
-			imgText.setForeground(impV.FourColor);			//글씨 색상
+			imgText.setForeground(impV.FourColor);	//글씨 색상
 		else if(rank == "H")
-			imgText.setForeground(impV.HColor);				//글씨 색상
+			imgText.setForeground(impV.HColor);		//글씨 색상
 		else if(rank == "X")
-			imgText.setForeground(impV.XColor);				//글씨 색상
+			imgText.setForeground(impV.XColor);		//글씨 색상
 		else
-			imgText.setForeground(impV.ZColor);				//글씨 색상
+			imgText.setForeground(impV.ZColor);		//글씨 색상
 		
 		cardPanel.add(imgLabel);
 		cardPanel.add(imgText);

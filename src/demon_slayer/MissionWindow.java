@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,36 +16,37 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-public class CombinationWindow extends JFrame {
+public class MissionWindow extends JFrame {
 	ImportentValue impV = new ImportentValue();
-
+	
 	private JPanel mainPanel, buttonPanel;
 	private JLabel titleLabel;
 	private JButton btn[], backButton;
 	
-	private String buttonName[] = {"H", "X", "Z"};
-
-	public CombinationWindow() {
+	private String buttonName[] = {"노말", "하드"};
+	
+	public MissionWindow() {
 		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
-		
-		setUndecorated(true); 	// 테두리 삭제
-		setResizable(false); 	// 크기 조절 여부
 		
 		mainPanel = new JPanel();
 		buttonPanel = new JPanel();
 		titleLabel = new JLabel();
-		btn = new JButton[3];
 		backButton = new JButton();
+		btn = new JButton[2];
+		
+		setUndecorated(true); 	// 테두리 삭제
+		setResizable(false); 	// 크기 조절 여부
+		
+		setBackground(new Color(0, 0, 0, 0)); 											// 컨테이너 공백
 		
 		/*	메인 패널	*/
-		setBackground(new Color(0, 0, 0, 0)); 											// 컨테이너 공백
 		mainPanel.setLayout(null);
 		mainPanel.setBackground(impV.backColor); 										// 메인 패널 색
 		mainPanel.setBorder(new LineBorder(Color.red, 2, true));
 		mainPanel.setBounds(0, 0, impV.window_width, impV.window_height);				//350, 600 (width, heigth)
 		
 		/*	타이틀 라벨	*/
-		titleLabel.setText("조합");
+		titleLabel.setText("난이도");
 		titleLabel.setFont(impV.titleKostar);
 		titleLabel.setBackground(new Color(0, 0, 0, 0));								//라벨 배경색
 		titleLabel.setForeground(Color.GREEN);
@@ -54,18 +54,19 @@ public class CombinationWindow extends JFrame {
 		titleLabel.setBounds(0, 0, impV.window_width, 120);								//라벨 위치 및 크기 (x, y, width, height)
 		
 		/* 버튼 패널 */
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 30));
 		buttonPanel.setBackground(new Color(0, 0, 0, 0)); // 버튼 패널 색
 		buttonPanel.setBounds(0, 100, impV.window_width, impV.window_height - 40);
 		
+		/*	버튼	*/
 		for(int i = 0; i < btn.length; i++) {
 			btn[i] = new JButton();
 			
 			/* 전체 적용 */
 			btn[i].setText(buttonName[i]);							//텍스트 설정
-			btn[i].setFont(new Font("Kostar", Font.PLAIN, 35));		//폰트 적용
+			btn[i].setFont(impV.normalKostar);		//폰트 적용
 			btn[i].setBackground(new Color(0, 0, 0, 0)); 			//배경색
-			btn[i].setPreferredSize(new Dimension(100, 100)); 		//크기 설정
+			btn[i].setPreferredSize(new Dimension(200, 40)); 		//크기 설정
 			btn[i].setBorder(new LineBorder(Color.red, 1, true));	//테두리
 			btn[i].setFocusPainted(false); 							//선택 됐을 때 생기는 테두리 없애기
 			
@@ -80,33 +81,22 @@ public class CombinationWindow extends JFrame {
 			/*	버튼 기능	*/
 			switch(i) {
 			case 0:
-				btn[i].setForeground(impV.HColor);		//글씨 색상
+				btn[i].setForeground(Color.white);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new CombinationSelectWindow(buttonName[0]);
+						new MissionSelectWindow(buttonName[0]);
 						setVisible(false);
 					}
 				});
 				break;
 				
 			case 1:
-				btn[i].setForeground(impV.XColor);		//글씨 색상
+				btn[i].setForeground(Color.red);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new CombinationSelectWindow(buttonName[1]);
-						setVisible(false);
-					}
-				});
-				break;
-				
-			case 2:
-				btn[i].setForeground(impV.ZColor);		//글씨 색상
-				btn[i].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						new CombinationSelectWindow(buttonName[2]);
+						new MissionSelectWindow(buttonName[1]);
 						setVisible(false);
 					}
 				});
@@ -154,9 +144,5 @@ public class CombinationWindow extends JFrame {
 		setSize(impV.window_width, impV.window_height);
 		setLocation(impV.screenSize.width - impV.window_width - 10, 50);
 		setVisible(true);
-	}
-	
-	protected void paintComponent(Graphics g) {
-		g.setColor(new Color(0, 0, 0, 0));
 	}
 }
