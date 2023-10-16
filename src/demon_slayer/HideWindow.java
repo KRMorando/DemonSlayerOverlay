@@ -1,6 +1,7 @@
 package demon_slayer;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,8 +29,8 @@ public class HideWindow extends JFrame {
 		
 		setBackground(new Color(0, 0, 0, 0));						//컨테이너 투명화
 		
-		hideButton.setText("버튼");									//글자
-		hideButton.setFont(impV.normalKostar);						//글꼴
+		hideButton.setText("숨기기");									//글자
+		hideButton.setFont(new Font("Kostar", Font.PLAIN, 18));		//글꼴
 		hideButton.setForeground(Color.green);						//글자 색
 		hideButton.setBackground(impV.backColor); 					//메인 버튼 색
 		hideButton.setBorder(new LineBorder(Color.red, 2, true));	//테두리
@@ -45,11 +46,13 @@ public class HideWindow extends JFrame {
 						impV.sideContainer.setVisible(false);
 					impV.activeContainer.setVisible(false);
 					isOn = false;
+					hideButton.setText("보이기");
 				} else {
 					if(impV.sideContainer != null)
 						impV.sideContainer.setVisible(true);
 					impV.activeContainer.setVisible(true);
 					isOn = true;
+					hideButton.setText("숨기기");
 				}
 				repaint();
 			}

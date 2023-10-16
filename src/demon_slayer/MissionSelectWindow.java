@@ -77,12 +77,12 @@ public class MissionSelectWindow extends JFrame {
 		else 
 			titleLabel.setForeground(Color.red);	// 하드 (빨간색)
 		
-		CustomLayout(makeCard("D", "[Q] 불당 오니", OLocation[0]), 0, 0);
-		CustomLayout(makeCard("C", "[W] 손 오니", OLocation[1]), 1, 0);
-		CustomLayout(makeCard("B", "[E] 늪 오니", OLocation[2]), 2, 0);
-		CustomLayout(makeCard("A", "[A] 스사마루", OLocation[3]), 0, 1);
-		CustomLayout(makeCard("S", "[S] 쿄우가이", OLocation[4]), 1, 1);
-		CustomLayout(makeCard("X", "[D] 루이", OLocation[5]), 2, 1);
+		CustomLayout(makeCard("D", "불당 오니 [Q]", OLocation[0]), 0, 0);
+		CustomLayout(makeCard("C", "손 오니 [W]", OLocation[1]), 1, 0);
+		CustomLayout(makeCard("B", "늪 오니 [E]", OLocation[2]), 2, 0);
+		CustomLayout(makeCard("A", "스사마루 [A]", OLocation[3]), 0, 1);
+		CustomLayout(makeCard("S", "쿄우가이 [S]", OLocation[4]), 1, 1);
+		CustomLayout(makeCard("X", "루이 [D]", OLocation[5]), 2, 1);
 
 		/*	===============================================
 			============	버튼 기능 노가다	===============
@@ -259,7 +259,7 @@ public class MissionSelectWindow extends JFrame {
 
 		imgText.setText(name); 								// 버튼 이름
 		imgText.setBackground(new Color(0, 0, 0, 0));		// 배경색
-		imgText.setFont(new Font("Kostar", Font.PLAIN, 15));// 폰트
+		imgText.setFont(new Font("Kostar", Font.PLAIN, 18));// 폰트
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 25, width, 25);		// x, y, width, height

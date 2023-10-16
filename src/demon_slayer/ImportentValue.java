@@ -40,6 +40,20 @@ public class ImportentValue {
 		backColor = new Color(0, 0, 0, gamma);
 	}
 	
+	/*	д©╫╨ер	*/
+	protected JLabel customText(String str, Color color, int size) {
+		JLabel valueLabel = new JLabel();
+		
+		valueLabel.setText(str);
+		valueLabel.setForeground(color);
+		valueLabel.setBackground(new Color(0, 0, 0, 0));
+		valueLabel.setVerticalAlignment(JLabel.CENTER);
+		valueLabel.setFont(new Font("Kostar", Font.PLAIN, size));
+		valueLabel.setSize(100, 80);
+		
+		return valueLabel;
+	}
+	
 	/*	+	*/
 	protected JLabel plus() {
 		JLabel valueLabel = new JLabel();
