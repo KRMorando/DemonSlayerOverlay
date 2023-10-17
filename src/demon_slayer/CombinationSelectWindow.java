@@ -23,7 +23,7 @@ public class CombinationSelectWindow extends JFrame {
 	ImportentValue impV = new ImportentValue();
 
 	private JPanel mainPanel, buttonPanel;
-	private JLabel titleLabel;
+	private JLabel titleLabel, explainLabel;
 	private JButton backButton;
 
 	private String[] HLocation = {	"./images/Char/H/chaH_Sakonji.png",
@@ -53,6 +53,7 @@ public class CombinationSelectWindow extends JFrame {
 
 		mainPanel = new JPanel();
 		titleLabel = new JLabel();
+		explainLabel = new JLabel();
 		buttonPanel = new JPanel();
 		backButton = new JButton();
 
@@ -69,6 +70,14 @@ public class CombinationSelectWindow extends JFrame {
 		titleLabel.setBackground(new Color(0, 0, 0, 0));	// 배경색
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);	// 중앙 정렬
 		titleLabel.setBounds(0, 0, impV.window_width, 100); // x, y, width, height
+		
+		/*	설명 라벨	*/
+		explainLabel.setText("원하는 캐릭터를 눌러주세요.");
+		explainLabel.setFont(impV.smallKostar);				// 폰트
+		explainLabel.setForeground(Color.green);					// 색상
+		explainLabel.setBackground(new Color(0, 0, 0, 0));		// 배경색
+		explainLabel.setHorizontalAlignment(JLabel.CENTER);		// 중앙 정렬
+		explainLabel.setBounds(0, 80, impV.window_width, 30);	// x, y, width, height
 		
 		/* 버튼 패널 	*/
 		buttonPanel.setLayout(null);
@@ -148,6 +157,7 @@ public class CombinationSelectWindow extends JFrame {
 		}
 
 		mainPanel.add(titleLabel);
+		mainPanel.add(explainLabel);
 		mainPanel.add(buttonPanel);
 		mainPanel.add(backButton);
 		add(mainPanel);

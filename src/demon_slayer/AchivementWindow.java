@@ -426,7 +426,7 @@ public class AchivementWindow extends JFrame {
 		backButton.setForeground(Color.GREEN); // 글씨색
 		backButton.setBorder(BorderFactory.createLineBorder(Color.RED, 1, true)); // 테두리
 		backButton.setFocusPainted(false); // 선택 됐을 때 생기는 테두리 없애기
-		backButton.setBounds(80, impV.window_height - 55, 200, 30);
+		backButton.setBounds(80, impV.window_height - 55, 190, 30);
 
 		/* 뒤로가기 버튼 기능 구현 */
 		backButton.addActionListener(new ActionListener() {
