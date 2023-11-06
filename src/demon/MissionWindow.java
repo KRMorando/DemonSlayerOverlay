@@ -26,7 +26,7 @@ public class MissionWindow extends JFrame {
 	private String buttonName[] = {"노말", "하드"};
 	
 	public MissionWindow() {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		mainPanel = new JPanel();
 		buttonPanel = new JPanel();
@@ -86,7 +86,7 @@ public class MissionWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new MissionSelectWindow(buttonName[0]);
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
@@ -97,7 +97,7 @@ public class MissionWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new MissionSelectWindow(buttonName[1]);
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
@@ -120,7 +120,7 @@ public class MissionWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MainWindow();
-				setVisible(false);
+				dispose();
 			}
 		});
 		

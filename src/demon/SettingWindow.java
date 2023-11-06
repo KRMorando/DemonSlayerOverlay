@@ -39,7 +39,7 @@ public class SettingWindow extends JFrame {
 	private int gamma = impV.gamma;
 	
 	public SettingWindow() {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		setUndecorated(true);	//테두리 삭제
         setResizable(false);	//크기 조절 여부
@@ -203,7 +203,7 @@ public class SettingWindow extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                     	new MainWindow();
-                        setVisible(false);
+                    	dispose();
                     }
                 });
         	}

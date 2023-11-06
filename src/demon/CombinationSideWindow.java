@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -28,48 +29,48 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 	//350, 180 + 250
 	//350, 430
 	
-	private String[] OneLocation = {"./images/Char/1/cha1_Aoi.png",
-									"./images/Char/1/cha1_Cube.png",
-									"./images/Char/1/cha1_Nezuko.png",
-									"./images/Char/1/cha1_Tanjiro.png",
-									"./images/Char/1/cha1_Yusiro.png"},
+	private String[] OneLocation = {"1/cha1_Aoi.png",
+									"1/cha1_Cube.png",
+									"1/cha1_Nezuko.png",
+									"1/cha1_Tanjiro.png",
+									"1/cha1_Yusiro.png"},
 
-					TwoLocation = {	"./images/Char/2/cha2_Genya.png",
-									"./images/Char/2/cha2_Inosuke.png",
-									"./images/Char/2/cha2_Kanao.png",
-									"./images/Char/2/cha2_Murata.png",
-									"./images/Char/2/cha2_Zenitsu.png"},
+					TwoLocation = {	"2/cha2_Genya.png",
+									"2/cha2_Inosuke.png",
+									"2/cha2_Kanao.png",
+									"2/cha2_Murata.png",
+									"2/cha2_Zenitsu.png"},
 
-					ThreeLocation = {"./images/Char/3/cha3_Mitsuri.png",
-									 "./images/Char/3/cha3_Muichiro.png",
-									 "./images/Char/3/cha3_obanai.png",
-									 "./images/Char/3/cha3_Sanemi.png",
-									 "./images/Char/3/cha3_Tengen.png" },
+					ThreeLocation = {"3/cha3_Mitsuri.png",
+									 "3/cha3_Muichiro.png",
+									 "3/cha3_obanai.png",
+									 "3/cha3_Sanemi.png",
+									 "3/cha3_Tengen.png" },
 					
-					FourLocation = {"./images/Char/4/cha4_Giyu.png",
-									"./images/Char/4/cha4_Gyomei.png",
-									"./images/Char/4/cha4_Kagaya.png",
-									"./images/Char/4/cha4_Kyojuro.png",
-									"./images/Char/4/cha4_Shinobu.png" },
+					FourLocation = {"4/cha4_Giyu.png",
+									"4/cha4_Gyomei.png",
+									"4/cha4_Kagaya.png",
+									"4/cha4_Kyojuro.png",
+									"4/cha4_Shinobu.png" },
 	
-					HLocation = {	"./images/Char/H/chaH_Sakonji.png",
-									"./images/Char/H/chaH_Jigoro.png",
-									"./images/Char/H/chaH_Tamayo.png",
-									"./images/Char/H/chaH_Kanae.png",
-									"./images/Char/H/chaH_Makomo.png",
-									"./images/Char/H/chaH_Sabito.png" },
+					HLocation = {	"H/chaH_Sakonji.png",
+									"H/chaH_Jigoro.png",
+									"H/chaH_Tamayo.png",
+									"H/chaH_Kanae.png",
+									"H/chaH_Makomo.png",
+									"H/chaH_Sabito.png" },
 
-					XLocation = {	"./images/Char/H/chaX_Tanjiro.png",
-									"./images/Char/H/chaX_Inosuke.png",
-									"./images/Char/H/chaX_Zenitsu.png",
-									"./images/Char/H/chaX_Giyu.png",
-									"./images/Char/H/chaX_Tengen.png",
-									"./images/Char/H/chaX_Mitsuri.png",
-									"./images/Char/H/chaX_Muichiro.png" },
+					XLocation = {	"H/chaX_Tanjiro.png",
+									"H/chaX_Inosuke.png",
+									"H/chaX_Zenitsu.png",
+									"H/chaX_Giyu.png",
+									"H/chaX_Tengen.png",
+									"H/chaX_Mitsuri.png",
+									"H/chaX_Muichiro.png" },
 
-					ZLocation = {	"./images/Char/Z/chaZ_Kanao.png",
-									"./images/Char/Z/chaZ_Nezuko.png",
-									"./images/Char/Z/chaZ_Kyojuro.png" };
+					ZLocation = {	"Z/chaZ_Kanao.png",
+									"Z/chaZ_Nezuko.png",
+									"Z/chaZ_Kyojuro.png" };
 	
 	public CombinationSideWindow(String name) {
 		this.name = name;
@@ -85,7 +86,7 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		}
 
 		runningThread = Thread.currentThread(); 				// 실행된 스레드 객체 얻기
-		impV.sideContainer = getRootPane().getContentPane();	// 현재 컨테이너 객체를 최근으로 등록
+		impV.sideContainer = this;	// 현재 컨테이너 객체를 최근으로 등록
 		
 		setUndecorated(true);	// 테두리 삭제
 		setResizable(false);	// 크기 조절 여부
@@ -285,9 +286,9 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 			Thread.sleep(impV.cooltime * 1000);
 			runningThread = null;
 			impV.sideContainer = null;
-			setVisible(false);
+			dispose();
 		} catch (InterruptedException e) {
-			setVisible(false);
+			dispose();
 		}
 	}
 	
@@ -295,7 +296,8 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		int width = 92;
 		int height = 120;
 		
-		ImageIcon icon = new ImageIcon(location), updateIcon;
+		URL url = this.getClass().getClassLoader().getResource(location);
+		ImageIcon icon = new ImageIcon(url), updateIcon;
 		Image img = icon.getImage();
 		Image updateImg = img.getScaledInstance(width, height - 25, Image.SCALE_SMOOTH);
 		updateIcon = new ImageIcon(updateImg);

@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -29,15 +30,15 @@ public class MissionSelectWindow extends JFrame {
 	private ArrayList<OniInfo> oniInfoArray = new ArrayList<OniInfo>();
 	
 	private String difficulty;
-	private String OLocation[] = {	"./images/Char/Oni/D.png",
-									"./images/Char/Oni/C.png",
-									"./images/Char/Oni/B.png",
-									"./images/Char/Oni/A.png",
-									"./images/Char/Oni/S.png",
-									"./images/Char/Oni/X.png" };
+	private String OLocation[] = {	"Oni/D.png",
+									"Oni/C.png",
+									"Oni/B.png",
+									"Oni/A.png",
+									"Oni/S.png",
+									"Oni/X.png" };
 	
 	public MissionSelectWindow(String difficulty) {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		this.difficulty = difficulty;
 		
@@ -94,7 +95,7 @@ public class MissionSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(0).name, oniInfoArray.get(0).location, oniInfoArray.get(0).color);
-				setVisible(false);
+				dispose();
 			}
 		});
 		/*	버튼 마우스 인식	*/
@@ -110,7 +111,7 @@ public class MissionSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(1).name, oniInfoArray.get(1).location, oniInfoArray.get(1).color);
-				setVisible(false);
+				dispose();
 			}
 		});
 		/*	버튼 마우스 인식	*/
@@ -126,7 +127,7 @@ public class MissionSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(2).name, oniInfoArray.get(2).location, oniInfoArray.get(2).color);
-				setVisible(false);
+				dispose();
 			}
 		});
 		/*	버튼 마우스 인식	*/
@@ -142,7 +143,7 @@ public class MissionSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(3).name, oniInfoArray.get(3).location, oniInfoArray.get(3).color);
-				setVisible(false);
+				dispose();
 			}
 		});
 		/*	버튼 마우스 인식	*/
@@ -158,7 +159,7 @@ public class MissionSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(4).name, oniInfoArray.get(4).location, oniInfoArray.get(4).color);
-				setVisible(false);
+				dispose();
 			}
 		});
 		/*	버튼 마우스 인식	*/
@@ -174,7 +175,7 @@ public class MissionSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(5).name, oniInfoArray.get(5).location, oniInfoArray.get(5).color);
-				setVisible(false);
+				dispose();
 			}
 		});
 		/*	버튼 마우스 인식	*/
@@ -203,7 +204,7 @@ public class MissionSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionWindow();
-				setVisible(false);
+				dispose();
 			}
 		});
 		
@@ -233,7 +234,8 @@ public class MissionSelectWindow extends JFrame {
 		int width = 100;
 		int height = 140;
 		
-		ImageIcon icon = new ImageIcon(location), updateIcon;
+		URL url = this.getClass().getClassLoader().getResource(location);
+		ImageIcon icon = new ImageIcon(url), updateIcon;
 		Image img = icon.getImage(), updateImg;
 		if(rank == "A")
 			updateImg = img.getScaledInstance(width - 20, height - 45, Image.SCALE_SMOOTH);

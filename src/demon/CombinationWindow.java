@@ -27,7 +27,7 @@ public class CombinationWindow extends JFrame {
 	private String buttonName[] = {"H", "X", "Z"};
 
 	public CombinationWindow() {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		setUndecorated(true); 	// 테두리 삭제
 		setResizable(false); 	// 크기 조절 여부
@@ -85,7 +85,7 @@ public class CombinationWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new CombinationSelectWindow(buttonName[0]);
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
@@ -96,7 +96,7 @@ public class CombinationWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new CombinationSelectWindow(buttonName[1]);
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
@@ -107,7 +107,7 @@ public class CombinationWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new CombinationSelectWindow(buttonName[2]);
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
@@ -130,7 +130,7 @@ public class CombinationWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MainWindow();
-				setVisible(false);
+				dispose();
 			}
 		});
 		

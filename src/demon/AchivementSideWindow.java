@@ -3,6 +3,7 @@ package demon;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,8 +18,8 @@ public class AchivementSideWindow extends JFrame implements Runnable {
 	ImportentValue impV = new ImportentValue();
 
 	private JPanel mainPanel, levelPanel, explainPanel, rewardPanel;
-	private String imgUrl[] = {	"./images/Achive/under_lamp1.png",
-								"./images/Achive/under_lamp2.png" };
+	private String imgUrl[] = {	"achive/under_lamp1.png",
+								"achive/under_lamp2.png" };
 
 	protected static Thread runningThread;
 	private static int number;
@@ -39,7 +40,7 @@ public class AchivementSideWindow extends JFrame implements Runnable {
 		}
 
 		runningThread = Thread.currentThread(); 				// 실행된 스레드 객체 얻기
-		impV.sideContainer = getRootPane().getContentPane();	// 현재 컨테이너 객체를 최근으로 등록
+		impV.sideContainer = this;	// 현재 컨테이너 객체를 최근으로 등록
 
 		setUndecorated(true);	// 테두리 삭제
 		setResizable(false);	// 크기 조절 여부
@@ -196,7 +197,8 @@ public class AchivementSideWindow extends JFrame implements Runnable {
 
 		case 16:
 			// 등잔밑 300 x 294
-			ImageIcon under1_icon = new ImageIcon(imgUrl[0]), under1_updateIcon;
+			URL url1 = this.getClass().getClassLoader().getResource(imgUrl[0]);
+			ImageIcon under1_icon = new ImageIcon(url1), under1_updateIcon;
 			Image under1_img = under1_icon.getImage();
 			Image under1_updateImg = under1_img.getScaledInstance(300, 294, Image.SCALE_SMOOTH);
 			under1_updateIcon = new ImageIcon(under1_updateImg);
@@ -214,7 +216,8 @@ public class AchivementSideWindow extends JFrame implements Runnable {
 
 		case 17:
 			// 등잔밑2 300 x 294
-			ImageIcon under2_icon = new ImageIcon(imgUrl[1]), under2_updateIcon;
+			URL url2 = this.getClass().getClassLoader().getResource(imgUrl[1]);
+			ImageIcon under2_icon = new ImageIcon(url2), under2_updateIcon;
 			Image under2_img = under2_icon.getImage();
 			Image under2_updateImg = under2_img.getScaledInstance(300, 294, Image.SCALE_SMOOTH);
 			under2_updateIcon = new ImageIcon(under2_updateImg);
@@ -360,9 +363,9 @@ public class AchivementSideWindow extends JFrame implements Runnable {
 			Thread.sleep(impV.cooltime * 1000);
 			runningThread = null;
 			impV.sideContainer = null;
-			setVisible(false);
+			dispose();
 		} catch (InterruptedException e) {
-			setVisible(false);
+			dispose();
 		}
 	}
 }

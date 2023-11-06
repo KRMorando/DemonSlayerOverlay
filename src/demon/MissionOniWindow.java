@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -31,7 +32,7 @@ public class MissionOniWindow extends JFrame {
 	private final Color lineColor = Color.red;
 	
 	public MissionOniWindow(String difficulty, String name, String location, Color color) {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		mainPanel = new JPanel();
 		difficultyPanel = new JPanel();
@@ -318,7 +319,7 @@ public class MissionOniWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MissionSelectWindow(difficulty);
-				setVisible(false);
+				dispose();
 			}
 		});
 		
@@ -358,7 +359,8 @@ public class MissionOniWindow extends JFrame {
 			height = 130;
 		}
 		
-		ImageIcon icon = new ImageIcon(location), updateIcon;
+		URL url = this.getClass().getClassLoader().getResource(location);
+		ImageIcon icon = new ImageIcon(url), updateIcon;
 		Image img = icon.getImage();
 		Image updateImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		updateIcon = new ImageIcon(updateImg);

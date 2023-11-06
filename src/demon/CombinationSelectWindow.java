@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -26,27 +27,27 @@ public class CombinationSelectWindow extends JFrame {
 	private JLabel titleLabel, explainLabel;
 	private JButton backButton;
 
-	private String[] HLocation = {	"./images/Char/H/chaH_Sakonji.png",
-									"./images/Char/H/chaH_Jigoro.png",
-									"./images/Char/H/chaH_Tamayo.png",
-									"./images/Char/H/chaH_Kanae.png",
-									"./images/Char/H/chaH_Makomo.png",
-									"./images/Char/H/chaH_Sabito.png" },
+	private String[] HLocation = {	"H/chaH_Sakonji.png",
+									"H/chaH_Jigoro.png",
+									"H/chaH_Tamayo.png",
+									"H/chaH_Kanae.png",
+									"H/chaH_Makomo.png",
+									"H/chaH_Sabito.png" },
 
-					XLocation = {	"./images/Char/X/chaX_Tanjiro.png",
-									"./images/Char/X/chaX_Inosuke.png",
-									"./images/Char/X/chaX_Zenitsu.png",
-									"./images/Char/X/chaX_Giyu.png",
-									"./images/Char/X/chaX_Tengen.png",
-									"./images/Char/X/chaX_Mitsuri.png",
-									"./images/Char/X/chaX_Muichiro.png" },
+					XLocation = {	"X/chaX_Tanjiro.png",
+									"X/chaX_Inosuke.png",
+									"X/chaX_Zenitsu.png",
+									"X/chaX_Giyu.png",
+									"X/chaX_Tengen.png",
+									"X/chaX_Mitsuri.png",
+									"X/chaX_Muichiro.png" },
 
-					ZLocation = {	"./images/Char/Z/chaZ_Kanao.png",
-									"./images/Char/Z/chaZ_Nezuko.png",
-									"./images/Char/Z/chaZ_Kyojuro.png" };
+					ZLocation = {	"Z/chaZ_Kanao.png",
+									"Z/chaZ_Nezuko.png",
+									"Z/chaZ_Kyojuro.png" };
 
 	public CombinationSelectWindow(String id) {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		setUndecorated(true);	// 테두리 삭제
 		setResizable(false);	// 크기 조절 여부
@@ -99,11 +100,11 @@ public class CombinationSelectWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(impV.sideContainer != null) {
-					impV.sideContainer.setVisible(false);
+					impV.sideContainer.dispose();
 					impV.sideContainer = null;
 				}
 				new CombinationWindow();
-				setVisible(false);
+				dispose();
 			}
 		});
 		
@@ -175,7 +176,8 @@ public class CombinationSelectWindow extends JFrame {
 		int width = 100;
 		int height = 140;
 		
-		ImageIcon icon = new ImageIcon(location), updateIcon;
+		URL url = this.getClass().getClassLoader().getResource(location);
+		ImageIcon icon = new ImageIcon(url), updateIcon;
 		Image img = icon.getImage();
 		Image updateImg = img.getScaledInstance(width, height - 25, Image.SCALE_SMOOTH);
 		updateIcon = new ImageIcon(updateImg);

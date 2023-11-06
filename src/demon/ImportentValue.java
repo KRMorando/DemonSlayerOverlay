@@ -1,16 +1,20 @@
 package demon;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class ImportentValue {
+	// V.VYYMMDD
+	protected static final String Version = "1.0231106";
+	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 화면 크기 구하기
+	
 	/* 창 가로, 세로 크기 */
 	protected static final int window_width = 350;
 	protected static final int window_height = 600;
@@ -33,7 +37,7 @@ public class ImportentValue {
 	protected static final Color ZColor = Color.orange;
 	
 	/*	컴포넌트 저장	*/
-	protected static Container activeContainer, sideContainer;
+	protected static JFrame activeContainer, sideContainer;
 	protected static JButton hideButton;
 
 	protected ImportentValue() {

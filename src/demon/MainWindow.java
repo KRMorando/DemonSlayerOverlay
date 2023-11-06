@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -29,7 +31,7 @@ public class MainWindow extends JFrame {
 	private JLabel madeLabel;
 
 	public MainWindow() {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		setUndecorated(true); // 테두리 삭제
 		setResizable(false); // 크기 조절 여부
@@ -60,6 +62,14 @@ public class MainWindow extends JFrame {
 
 			/* 버튼 삽입 */
 			Insert(gbl, mainPanel, btn[i], 1, i, 2, 1);
+			
+			/*	버튼 마우스 인식	*/
+			btn[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
+					repaint();
+				}
+			});
 
 			/* 업적 버튼(0) */
 			switch (i) {
@@ -68,7 +78,7 @@ public class MainWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new AchivementWindow();
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
@@ -79,7 +89,7 @@ public class MainWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new CombinationWindow();
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
@@ -90,14 +100,13 @@ public class MainWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new MissionWindow();
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
 
 			/* 카페 버튼(3) */
 			case 3:
-				// 프로그램 종료 버튼
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -120,14 +129,13 @@ public class MainWindow extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new SettingWindow();
-						setVisible(false);
+						dispose();
 					}
 				});
 				break;
 
 			/* 종료 버튼(5) */
 			case 5:
-				// 프로그램 종료 버튼
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

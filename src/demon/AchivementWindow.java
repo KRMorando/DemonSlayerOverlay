@@ -44,7 +44,7 @@ public class AchivementWindow extends JFrame {
 	private int gridY = 0; // 상하
 
 	public AchivementWindow() {
-		impV.activeContainer = getRootPane().getContentPane();	//현재 활성화된 컨테이너 저장
+		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		setUndecorated(true); // 테두리 삭제
 		setResizable(false); // 크기 조절 여부
@@ -433,11 +433,11 @@ public class AchivementWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(impV.sideContainer != null) {
-					impV.sideContainer.setVisible(false);
+					impV.sideContainer.dispose();
 					impV.sideContainer = null;
 				}
 				new MainWindow();
-				setVisible(false);
+				dispose();
 			}
 		});
 		
