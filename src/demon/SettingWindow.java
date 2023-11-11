@@ -41,45 +41,39 @@ public class SettingWindow extends JFrame {
 	public SettingWindow() {
 		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
-		setUndecorated(true);	//테두리 삭제
-        setResizable(false);	//크기 조절 여부
-        
         btn = new JButton[2];
         String[] buttonName = {"적용", "뒤로가기"};
         
         gbl = new GridBagLayout();
-        mainPanel = new JPanel();
+        mainPanel = new MainPanel(gbl);
         durationPanel = new JPanel();
         gammaPanel = new JPanel();
         durationText = new JLabel();
         decBtn = new JButton();
         incBtn = new JButton();
         
-        /*	메인	*/
-        setBackground(new Color(0, 0, 0, 0));					//컨테이너 공백
-        mainPanel.setLayout(gbl);
-        mainPanel.setBackground(impV.backColor);				//메인 패널 색
-        mainPanel.setBorder(new LineBorder(Color.red, 2, true));
+        /*	메인 프레임	*/
+        impV.FrameSetting(this);
         
         /*	제목	*/
         titleLabel = new JLabel();
         titleLabel.setText("설정");
-        titleLabel.setFont(impV.titleKostar);
+        titleLabel.setFont(impV.titleTTF);
         titleLabel.setForeground(Color.GREEN);
         
         /*	창 지속 시간	*/
-        Border bf = BorderFactory.createTitledBorder(new LineBorder(Color.white, 1), "창 지속 시간", TitledBorder.CENTER, TitledBorder.TOP, impV.normalKostar, Color.white);
+        Border bf = BorderFactory.createTitledBorder(new LineBorder(Color.white, 1), "창 지속 시간", TitledBorder.CENTER, TitledBorder.TOP, impV.normalTTF, Color.white);
         durationPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         durationPanel.setBorder(bf);
 		durationPanel.setBackground(new Color(0, 0, 0, 0)); // 배경색
-		durationPanel.setSize(220, 50);
+		durationPanel.setSize(240, 60);
         
         /*	창 지속 시간 (감소)		*/
         decBtn.setText("-");
         decBtn.setForeground(Color.red);
-        decBtn.setFont(new Font("Kostar", Font.PLAIN, 35));
+        decBtn.setFont(new Font(impV.ttf, Font.PLAIN, 35));
         decBtn.setBackground(new Color(0, 0, 0, 0));
-        decBtn.setPreferredSize(new Dimension(50, 50));
+        decBtn.setPreferredSize(new Dimension(60, 60));
         decBtn.setFocusPainted(false);
         decBtn.setBorderPainted(false); // 테두리 없음
         decBtn.addActionListener(new ActionListener() {
@@ -106,16 +100,16 @@ public class SettingWindow extends JFrame {
         /*	창 지속 시간 (텍스트)	*/
         durationText = new JLabel();
         durationText.setText(impV.cooltime + "초");
-        durationText.setFont(impV.normalKostar);
+        durationText.setFont(impV.normalTTF);
         durationText.setForeground(Color.GREEN);
-        durationText.setSize(120, 50);
+        durationText.setSize(120, 60);
         
         /*	창 지속 시간 (증가)		*/
         incBtn.setText("+");
         incBtn.setForeground(Color.CYAN);
-        incBtn.setFont(new Font("Kostar", Font.PLAIN, 25));
+        incBtn.setFont(new Font(impV.ttf, Font.PLAIN, 25));
         incBtn.setBackground(new Color(0, 0, 0, 0));
-        incBtn.setPreferredSize(new Dimension(50, 50));
+        incBtn.setPreferredSize(new Dimension(60, 60));
         incBtn.setFocusPainted(false);
         incBtn.setBorderPainted(false); // 테두리 없음
         incBtn.addActionListener(new ActionListener() {
@@ -143,7 +137,7 @@ public class SettingWindow extends JFrame {
         durationPanel.add(incBtn);
         
         /*	투명도	*/
-        Border bl = BorderFactory.createTitledBorder(new LineBorder(Color.white, 1), "배경 투명도", TitledBorder.CENTER, TitledBorder.TOP, impV.normalKostar, Color.white);
+        Border bl = BorderFactory.createTitledBorder(new LineBorder(Color.white, 1), "배경 투명도", TitledBorder.CENTER, TitledBorder.TOP, impV.normalTTF, Color.white);
         gammaPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         gammaPanel.setBorder(bl);
         gammaPanel.setBackground(new Color(0, 0, 0, 0)); // 배경색
@@ -180,7 +174,7 @@ public class SettingWindow extends JFrame {
         	
         	/*	전체 적용	*/
         	btn[i].setText(buttonName[i]);			//글씨 적용
-            btn[i].setFont(impV.normalKostar);		//폰트 적용
+            btn[i].setFont(impV.normalTTF);		//폰트 적용
             btn[i].setForeground(Color.GREEN);		//글씨 색상 적용
             btn[i].setBackground(new Color(0, 0, 0));
             btn[i].setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));	//테두리 설정
@@ -193,6 +187,8 @@ public class SettingWindow extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                     	impV.gamma = gamma;
+                    	new MainWindow();
+                    	dispose();
                     }
                 });
         	}
@@ -228,35 +224,34 @@ public class SettingWindow extends JFrame {
         Insert(gbl, mainPanel, gammaPanel, 0, 2, 2, 1);
         add(mainPanel);
         
-        setAlwaysOnTop(true);							//항상 위에 보이기
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//윈도우 종료시 javax도 종료
-        
      	//가로 세로 길이 지정 및 보이기
         setSize(impV.window_width, impV.window_height);
         setLocation(impV.screenSize.width - impV.window_width - 10, 50);
         setVisible(true);
         
+        repaint();
+        
         //openProgram();
 	}
 	
-	//프로그램 열기
-	private void openProgram() {
-		try {
-            // 실행할 외부 프로그램의 경로와 인자를 설정합니다.
-            String programPath = "./Gamma.exe";
-
-            // 프로세스 빌더를 생성하고 외부 프로그램을 실행합니다.
-            ProcessBuilder processBuilder = new ProcessBuilder(programPath);
-
-            // 프로세스를 시작합니다.
-            Process process = processBuilder.start();
-
-            // 프로세스의 종료를 대기합니다.
-            int exitCode = process.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-	}
+//	//프로그램 열기
+//	private void openProgram() {
+//		try {
+//            // 실행할 외부 프로그램의 경로와 인자를 설정합니다.
+//            String programPath = "./Gamma.exe";
+//
+//            // 프로세스 빌더를 생성하고 외부 프로그램을 실행합니다.
+//            ProcessBuilder processBuilder = new ProcessBuilder(programPath);
+//
+//            // 프로세스를 시작합니다.
+//            Process process = processBuilder.start();
+//
+//            // 프로세스의 종료를 대기합니다.
+//            int exitCode = process.waitFor();
+//        } catch (IOException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//	}
 	
 	//Insert (그리드백, 패널, 컴포넌트, x, y, 좌우, 높낮이);
 	public void Insert(GridBagLayout gbl, JPanel panel, Component c, int x, int y, int w, int h) {

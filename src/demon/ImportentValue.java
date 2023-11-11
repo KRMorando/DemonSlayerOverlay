@@ -3,7 +3,11 @@ package demon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,9 +28,10 @@ public class ImportentValue {
 	protected static int cooltime = 3;
 	protected static Color backColor; // 배경화면 색상 (RGBA)
 
-	protected static final Font smallKostar = new Font("Kostar", Font.PLAIN, 18);
-	protected static final Font normalKostar = new Font("Kostar", Font.PLAIN, 20);
-	protected static final Font titleKostar = new Font("Kostar", Font.PLAIN, 30);
+	protected static final String ttf = "12롯데마트드림Medium";
+	protected static final Font smallTTF = new Font(ttf, Font.PLAIN, 18);
+	protected static final Font normalTTF = new Font(ttf, Font.PLAIN, 20);
+	protected static final Font titleTTF = new Font(ttf, Font.PLAIN, 30);
 	
 	protected static final Color OneColor = Color.white;
 	protected static final Color TwoColor = new Color(255, 60, 220);
@@ -44,6 +49,15 @@ public class ImportentValue {
 		backColor = new Color(0, 0, 0, gamma);
 	}
 	
+	protected void FrameSetting(JFrame frame) {
+		/*	메인 프레임	*/
+        frame.setUndecorated(true);								//테두리 삭제
+        frame.setResizable(false);								//크기 조절 여부
+        frame.setBackground(new Color(0, 0, 0, 0));				//컨테이너 공백
+        frame.setAlwaysOnTop(true); 							// 항상 위에 보이기
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 윈도우 종료시 javax도 종료
+	}
+	
 	/*	커스텀	*/
 	protected JLabel customText(String str, Color color, int size) {
 		JLabel valueLabel = new JLabel();
@@ -52,109 +66,25 @@ public class ImportentValue {
 		valueLabel.setForeground(color);
 		valueLabel.setBackground(new Color(0, 0, 0, 0));
 		valueLabel.setVerticalAlignment(JLabel.CENTER);
-		valueLabel.setFont(new Font("Kostar", Font.PLAIN, size));
+		valueLabel.setFont(new Font(ttf, Font.PLAIN, size));
 		valueLabel.setSize(100, 80);
 		
 		return valueLabel;
 	}
 	
 	/*	+	*/
-	protected JLabel plus() {
+	protected JLabel Plus() {
 		JLabel valueLabel = new JLabel();
 		
 		valueLabel.setText("+");
 		valueLabel.setForeground(Color.white);
 		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
+		valueLabel.setFont(normalTTF);
+		valueLabel.setHorizontalAlignment(JLabel.RIGHT);
 		
 		return valueLabel;
 	}
 	
-	/*	1레벨	*/
-	protected JLabel lv1(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(OneColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	2레벨	*/
-	protected JLabel lv2(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(TwoColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	3레벨	*/
-	protected JLabel lv3(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(ThreeColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	4레벨	*/
-	protected JLabel lv4(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(FourColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	히든	*/
-	protected JLabel lvH(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(HColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	X	*/
-	protected JLabel lvX(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(XColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	Z	*/
-	protected JLabel lvZ(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(ZColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(normalKostar);
-		
-		return valueLabel;
-	}
-	
-	/*===========================================================작은 버전================================================================*/
 	/*	+	*/
 	protected JLabel sPlus() {
 		JLabel valueLabel = new JLabel();
@@ -162,91 +92,57 @@ public class ImportentValue {
 		valueLabel.setText("+");
 		valueLabel.setForeground(Color.white);
 		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
+		valueLabel.setFont(smallTTF);
 		
 		return valueLabel;
 	}
 	
-	/*	1레벨	*/
-	protected JLabel slv1(String str) {
+	/*	lvL	*/
+	protected JLabel lvL(String level, String size, String str) {
 		JLabel valueLabel = new JLabel();
 		
 		valueLabel.setText(str);
-		valueLabel.setForeground(OneColor);
 		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	2레벨	*/
-	protected JLabel slv2(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(TwoColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	3레벨	*/
-	protected JLabel slv3(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(ThreeColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	4레벨	*/
-	protected JLabel slv4(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(FourColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	히든	*/
-	protected JLabel slvH(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(HColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	X	*/
-	protected JLabel slvX(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(XColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
-		
-		return valueLabel;
-	}
-	
-	/*	Z	*/
-	protected JLabel slvZ(String str) {
-		JLabel valueLabel = new JLabel();
-		
-		valueLabel.setText(str);
-		valueLabel.setForeground(ZColor);
-		valueLabel.setBackground(new Color(0, 0, 0, 0));
-		valueLabel.setFont(smallKostar);
+		valueLabel.setHorizontalAlignment(JLabel.RIGHT);
+
+		if(size == "normal")
+			valueLabel.setFont(normalTTF);
+		else
+			valueLabel.setFont(smallTTF);
+
+		switch(level) {
+		case "1":
+			valueLabel.setForeground(OneColor);
+			break;
+			
+		case "2":
+			valueLabel.setForeground(TwoColor);
+			break;
+			
+		case "3":
+			valueLabel.setForeground(ThreeColor);
+			break;
+			
+		case "4":
+			valueLabel.setForeground(FourColor);
+			break;
+			
+		case "H":
+			valueLabel.setForeground(HColor);
+			break;
+			
+		case "X":
+			valueLabel.setForeground(XColor);
+			break;
+			
+		case "Z":
+			valueLabel.setForeground(ZColor);
+			break;
+			
+			default:
+				valueLabel.setForeground(OneColor);
+				break;
+		}
 		
 		return valueLabel;
 	}

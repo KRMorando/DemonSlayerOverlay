@@ -88,20 +88,15 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		runningThread = Thread.currentThread(); 				// 실행된 스레드 객체 얻기
 		impV.sideContainer = this;	// 현재 컨테이너 객체를 최근으로 등록
 		
-		setUndecorated(true);	// 테두리 삭제
-		setResizable(false);	// 크기 조절 여부
-		
-		mainPanel = new JPanel();
+		mainPanel = new MainPanel();
 		levelPanel = new JPanel();
 		explainPanel = new JPanel();
 		titleLabel = new JLabel();
-		
-		setBackground(new Color(0, 0, 0, 0));
 
+		/* 메인 프레임 */
+		impV.FrameSetting(this);
+		
 		/* 메인 패널 	*/
-		mainPanel.setLayout(null); 											//레이아웃
-		mainPanel.setBackground(impV.backColor);							//배경색
-		mainPanel.setBorder(new LineBorder(Color.red, 2, true));			//테두리
 		mainPanel.setBounds(0, 0, impV.sideWindow_width, impV.sideWindow_height + under_size);	//x, y, 가로, 세로
 		
 		/* 레벨 패널 */
@@ -123,31 +118,31 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 			lvPanel[i].setSize(impV.sideWindow_width - 24, 120);
 			if(name != "쿄쥬로") {
 				if(i == 0)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallKostar, impV.ThreeColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
 				else if(i == 1)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.TwoColor, 1), "Lv2", TitledBorder.LEFT, TitledBorder.TOP, impV.smallKostar, impV.TwoColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.TwoColor, 1), "Lv2", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.TwoColor);
 				else
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallKostar, impV.OneColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.OneColor);
 			} else {
 				if(i == 0)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.FourColor, 1), "Lv4", TitledBorder.LEFT, TitledBorder.TOP, impV.smallKostar, impV.FourColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.FourColor, 1), "Lv4", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.FourColor);
 				else if(i == 1)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallKostar, impV.ThreeColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
 				else
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallKostar, impV.OneColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.OneColor);
 			}
 			lvPanel[i].setBorder(bf);
 			CustomLayout(explainPanel, lvPanel[i], 0, i);
 		}
 		
 		/* 레벨 패널 추가 */
-		levelPanel.add(impV.lv1("Lv1 "));
-		levelPanel.add(impV.lv2("Lv2 "));
-		levelPanel.add(impV.lv3("Lv3 "));
-		levelPanel.add(impV.lv4("Lv4 "));
-		levelPanel.add(impV.lvH("LvH "));
-		levelPanel.add(impV.lvX("LvX "));
-		levelPanel.add(impV.lvZ("LvZ"));
+		levelPanel.add(impV.lvL("1", "normal", "Lv1 "));
+		levelPanel.add(impV.lvL("2", "normal", "Lv2 "));
+		levelPanel.add(impV.lvL("3", "normal", "Lv3 "));
+		levelPanel.add(impV.lvL("4", "normal", "Lv4 "));
+		levelPanel.add(impV.lvL("H", "normal", "LvH "));
+		levelPanel.add(impV.lvL("X", "normal", "LvX "));
+		levelPanel.add(impV.lvL("Z", "normal", "LvZ"));
 		
 		/* makeCard(등급, 이름, 사진 경로) */
 		/* CustomLayout(컴포넌트, n번째 (0~2), 층(1~)	*/
@@ -273,9 +268,6 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		mainPanel.add(levelPanel);
 		mainPanel.add(explainPanel);
 		add(mainPanel);
-		
-		setAlwaysOnTop(true); // 항상 위에 보이기
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 윈도우 종료시 javax도 종료
 
 		// 가로 세로 길이 지정 및 보이기
 		setSize(impV.sideWindow_width, impV.sideWindow_height + under_size);
@@ -316,7 +308,7 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 
 		imgText.setText(name); 							// 버튼 이름
 		imgText.setBackground(new Color(0, 0, 0, 0));	// 배경색
-		imgText.setFont(impV.smallKostar); 				// 폰트
+		imgText.setFont(impV.smallTTF); 				// 폰트
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 40, width, 35);	// x, y, width, height

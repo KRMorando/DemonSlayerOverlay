@@ -46,25 +46,24 @@ public class AchivementWindow extends JFrame {
 	public AchivementWindow() {
 		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
-		setUndecorated(true); // 테두리 삭제
-		setResizable(false); // 크기 조절 여부
-
 		btn = new JButton[29];
-		mainPanel = new JPanel();
+		mainPanel = new MainPanel();
 		buttonPanel = new JPanel();
-		backButton = new JButton();
+		backButton = new BackButton(this, "Main");
+		backButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
+				repaint();
+			}
+		});
 
-		/* 메인 패널 */
-		setBackground(new Color(0, 0, 0, 0)); // 컨테이너 공백
-		mainPanel.setLayout(null);
-		mainPanel.setBackground(impV.backColor); // 메인 패널 색
-		mainPanel.setBorder(new LineBorder(Color.red, 2, true));
-		mainPanel.setBounds(0, 0, impV.window_width, impV.window_height);
+		/*	메인 프레임	*/
+        impV.FrameSetting(this);
 		
 		/* 제목 */
 		titleLabel = new JLabel();
 		titleLabel.setText("업적");
-		titleLabel.setFont(impV.titleKostar);
+		titleLabel.setFont(impV.titleTTF);
 		titleLabel.setBackground(new Color(0, 0, 0, 0));
 		titleLabel.setForeground(Color.GREEN);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -81,7 +80,7 @@ public class AchivementWindow extends JFrame {
 
 			/* 전체 적용 */
 			btn[i].setText(buttonName[i]); // 글씨 적용
-			btn[i].setFont(impV.normalKostar); // 폰트 적용
+			btn[i].setFont(impV.normalTTF); // 폰트 적용
 			btn[i].setBackground(new Color(0, 0, 0, 0)); // 배경색
 			btn[i].setPreferredSize(new Dimension(115, 40)); // 크기 설정
 			btn[i].setBorderPainted(false); // 테두리 없음
@@ -419,43 +418,10 @@ public class AchivementWindow extends JFrame {
 			}
 		}
 
-		/* 뒤로가기 버튼 */
-		backButton.setText("뒤로가기"); // 글씨 적용
-		backButton.setFont(new Font("Kostar", Font.PLAIN, 18)); // 폰트 적용
-		backButton.setBackground(new Color(0, 0, 0, 0)); // 배경색
-		backButton.setForeground(Color.GREEN); // 글씨색
-		backButton.setBorder(BorderFactory.createLineBorder(Color.RED, 1, true)); // 테두리
-		backButton.setFocusPainted(false); // 선택 됐을 때 생기는 테두리 없애기
-		backButton.setBounds(80, impV.window_height - 55, 190, 30);
-
-		/* 뒤로가기 버튼 기능 구현 */
-		backButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(impV.sideContainer != null) {
-					impV.sideContainer.dispose();
-					impV.sideContainer = null;
-				}
-				new MainWindow();
-				dispose();
-			}
-		});
-		
-		/*	버튼 마우스 인식	*/
-		backButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
-			}
-		});
-
 		mainPanel.add(titleLabel);
 		mainPanel.add(buttonPanel);
 		mainPanel.add(backButton);
 		add(mainPanel);
-
-		setAlwaysOnTop(true); // 항상 위에 보이기
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 윈도우 종료시 javax도 종료
 
 		// 가로 세로 길이 지정 및 보이기
 		setSize(impV.window_width, impV.window_height);

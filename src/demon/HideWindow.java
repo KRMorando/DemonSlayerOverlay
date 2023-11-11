@@ -20,22 +20,21 @@ public class HideWindow extends JFrame {
 	private boolean isOn = true;
 	
 	public HideWindow() {
-		setUndecorated(true);	//테두리 삭제
-		setResizable(false);	//크기 조절 여부
 		
 		hideButton = new JButton();
 		//현재 컨테이너 객체를 하이드 버튼으로 등록
 		impV.hideButton = hideButton;
 		
-		setBackground(new Color(0, 0, 0, 0));						//컨테이너 투명화
+		/*	메인 프레임	*/
+		impV.FrameSetting(this);
 		
 		hideButton.setText("숨기기");									//글자
-		hideButton.setFont(new Font("Kostar", Font.PLAIN, 18));		//글꼴
+		hideButton.setFont(new Font(impV.ttf, Font.PLAIN, 18));		//글꼴
 		hideButton.setForeground(Color.green);						//글자 색
 		hideButton.setBackground(impV.backColor); 					//메인 버튼 색
 		hideButton.setBorder(new LineBorder(Color.red, 2, true));	//테두리
 		hideButton.setSize(btn_width, btn_height);					//크기
-		hideButton.setFocusPainted(false); // 선택 됐을 때 생기는 테두리 없애기
+		hideButton.setFocusPainted(false); 							// 선택 됐을 때 생기는 테두리 없애기
 		
 		/*	버튼 기능 구현	*/
 		hideButton.addActionListener(new ActionListener() {
@@ -79,9 +78,6 @@ public class HideWindow extends JFrame {
 		});
 		
 		add(hideButton);
-
-		setAlwaysOnTop(true); // 항상 위에 보이기
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 윈도우 종료시 javax도 종료
 
 		setSize(btn_width, btn_height);
 		setLocation(impV.screenSize.width - impV.window_width - 10, impV.window_height + btn_height - 12);

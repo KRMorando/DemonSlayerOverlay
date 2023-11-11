@@ -33,27 +33,22 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
-		setUndecorated(true); // 테두리 삭제
-		setResizable(false); // 크기 조절 여부
-
 		JButton[] btn = new JButton[6];
 		String[] buttonName = { "업적", "조합", "임무", "카페", "설정", "종료" };
 
 		gbl = new GridBagLayout();
-		mainPanel = new JPanel();
+		mainPanel = new MainPanel(gbl);
 
-		setBackground(new Color(0, 0, 0, 0)); // 컨테이너 공백
-		mainPanel.setLayout(gbl);
-		mainPanel.setBackground(impV.backColor); // 메인 패널 색
-		mainPanel.setBorder(new LineBorder(Color.red, 2, true));
+		/*	메인 프레임	*/
+		impV.FrameSetting(this);
 
-		// 버튼 생성 및 추가
+		/*	버튼 생성 및 기능 추가	*/
 		for (int i = 0; i < btn.length; i++) {
 			btn[i] = new JButton();
 
 			/* 전체 적용 */
 			btn[i].setText(buttonName[i]); // 글씨 적용
-			btn[i].setFont(impV.normalKostar); // 폰트 적용
+			btn[i].setFont(impV.normalTTF); // 폰트 적용
 			btn[i].setForeground(Color.GREEN); // 글씨 색상 적용
 			btn[i].setBackground(new Color(0, 0, 0));
 			btn[i].setBorder(BorderFactory.createLineBorder(Color.RED, 1, true)); // 테두리 설정
@@ -148,14 +143,11 @@ public class MainWindow extends JFrame {
 
 		madeLabel = new JLabel();
 		madeLabel.setText("Made by Morando");
-		madeLabel.setFont(new Font("Kostar", Font.ITALIC, 15));
+		madeLabel.setFont(new Font(impV.ttf, Font.ITALIC, 15));
 		madeLabel.setForeground(Color.GREEN);
 		Insert(gbl, mainPanel, madeLabel, 1, 6, 2, 1);
 
 		add(mainPanel);
-
-		setAlwaysOnTop(true); // 항상 위에 보이기
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 윈도우 종료시 javax도 종료
 
 		setSize(impV.window_width, impV.window_height);
 		setLocation(impV.screenSize.width - impV.window_width - 10, 50);

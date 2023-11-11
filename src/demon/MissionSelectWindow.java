@@ -42,25 +42,23 @@ public class MissionSelectWindow extends JFrame {
 		
 		this.difficulty = difficulty;
 		
-		setUndecorated(true);	// 테두리 삭제
-		setResizable(false);	// 크기 조절 여부
-
-		mainPanel = new JPanel();
+		mainPanel = new MainPanel();
 		titleLabel = new JLabel();
 		buttonPanel = new JPanel();
-		backButton = new JButton();
+		backButton = new BackButton(this, "Mission");
+		backButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
+				repaint();
+			}
+		});
 
-		setBackground(new Color(0, 0, 0, 0));
-
-		/* 메인 패널 	*/
-		mainPanel.setLayout(null); 											//레이아웃
-		mainPanel.setBackground(impV.backColor);							//배경색
-		mainPanel.setBorder(new LineBorder(Color.red, 2, true));			//테두리
-		mainPanel.setBounds(0, 0, impV.window_width, impV.window_height);	//x, y, 가로, 세로
+		/*	메인 프레임	*/
+		impV.FrameSetting(this);
 		
 		/* 타이틀 라벨	*/
 		titleLabel.setText(difficulty);						// 글자
-		titleLabel.setFont(impV.titleKostar);				// 폰트
+		titleLabel.setFont(impV.titleTTF);				// 폰트
 		titleLabel.setBackground(new Color(0, 0, 0, 0));	// 배경색
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);	// 중앙 정렬
 		titleLabel.setBounds(0, 0, impV.window_width, 100); // x, y, width, height
@@ -189,40 +187,10 @@ public class MissionSelectWindow extends JFrame {
 			============	버튼 기능 노가다 끝	===============
 			===============================================	*/
 		
-		/* 뒤로가기 버튼 */
-		backButton.setText("뒤로가기");							// 글씨 적용
-		backButton.setFont(new Font("Kostar", Font.PLAIN, 18));	// 폰트 적용
-		backButton.setBackground(new Color(0, 0, 0, 0));		// 배경색
-		backButton.setForeground(Color.GREEN);					// 글씨색
-		backButton.setFocusPainted(false);						// 선택 됐을 때 생기는 테두리 없애기
-		backButton.setPreferredSize(new Dimension(200, 30));	//크기 설정
-		backButton.setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));	// 테두리
-		backButton.setBounds(80, impV.window_height - 55, 200, 30);
-
-		/* 뒤로가기 버튼 기능 구현 */
-		backButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new MissionWindow();
-				dispose();
-			}
-		});
-		
-		/*	버튼 마우스 인식	*/
-		backButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
-			}
-		});
-		
 		mainPanel.add(titleLabel);
 		mainPanel.add(buttonPanel);
 		mainPanel.add(backButton);
 		add(mainPanel);
-
-		setAlwaysOnTop(true); // 항상 위에 보이기
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 윈도우 종료시 javax도 종료
 
 		// 가로 세로 길이 지정 및 보이기
 		setSize(impV.window_width, impV.window_height);
@@ -261,7 +229,7 @@ public class MissionSelectWindow extends JFrame {
 
 		imgText.setText(name); 								// 버튼 이름
 		imgText.setBackground(new Color(0, 0, 0, 0));		// 배경색
-		imgText.setFont(new Font("Kostar", Font.PLAIN, 18));// 폰트
+		imgText.setFont(new Font(impV.ttf, Font.PLAIN, 18));// 폰트
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 25, width, 25);		// x, y, width, height

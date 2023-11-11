@@ -34,7 +34,7 @@ public class MissionOniWindow extends JFrame {
 	public MissionOniWindow(String difficulty, String name, String location, Color color) {
 		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
-		mainPanel = new JPanel();
+		mainPanel = new MainPanel();
 		difficultyPanel = new JPanel();
 		namePanel = new JPanel();
 		rankPanel = new JPanel();
@@ -48,19 +48,17 @@ public class MissionOniWindow extends JFrame {
 		leftLabel = new JLabel();
 		rightLabel = new JLabel();
 		difficultyLabel = new JLabel();
-		backButton = new JButton();
+		backButton = new BackButton(this, difficulty);
+		backButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
+				repaint();
+			}
+		});
 		
-		setUndecorated(true);	// 테두리 삭제
-		setResizable(false);	// 크기 조절 여부
-		
-		setBackground(new Color(0, 0, 0, 0));
-
 		/*	350, 600	*/
-		/* 메인 패널 	*/
-		mainPanel.setLayout(null); 											//레이아웃
-		mainPanel.setBackground(impV.backColor);							//배경색
-		mainPanel.setBorder(new LineBorder(Color.red, 2, true));			//테두리
-		mainPanel.setBounds(0, 0, impV.window_width, impV.window_height);	//x, y, 가로, 세로
+		/*	메인 프레임	*/
+		impV.FrameSetting(this);
 		
 		/*	난이도 패널	*/
 		difficultyPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); //레이아웃
@@ -68,7 +66,7 @@ public class MissionOniWindow extends JFrame {
 		difficultyPanel.setBounds(5, 5, impV.window_width - 5, 40);					//x, y, 가로, 세로
 		
 		leftLabel.setText("[");
-		leftLabel.setFont(impV.smallKostar);
+		leftLabel.setFont(impV.smallTTF);
 		leftLabel.setForeground(Color.cyan);
 		leftLabel.setSize(30, 40);
 		
@@ -79,18 +77,18 @@ public class MissionOniWindow extends JFrame {
 			difficultyLabel.setText("Normal");
 			difficultyLabel.setForeground(Color.white);
 		}
-		difficultyLabel.setFont(impV.smallKostar);
+		difficultyLabel.setFont(impV.smallTTF);
 		difficultyLabel.setSize(60, 40);
 		
 		rightLabel.setText("]");
-		rightLabel.setFont(impV.smallKostar);
+		rightLabel.setFont(impV.smallTTF);
 		rightLabel.setForeground(Color.cyan);
 		rightLabel.setSize(30, 40);
 		
 		/*	라운드 라벨	*/
 		roundLabel.setBackground(new Color(0, 0, 0, 0));
 		roundLabel.setForeground(Color.red);
-		roundLabel.setFont(impV.smallKostar);
+		roundLabel.setFont(impV.smallTTF);
 		
 		difficultyPanel.add(leftLabel);
 		difficultyPanel.add(difficultyLabel);
@@ -105,28 +103,28 @@ public class MissionOniWindow extends JFrame {
 			oniLabel.setLocation((int)((350 - oniLabel.getWidth()) / 2), 20);
 		
 		/*	이름 패널	*/
-		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "보스명", TitledBorder.LEFT, TitledBorder.TOP, impV.normalKostar, Color.white);
+		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "보스명", TitledBorder.LEFT, TitledBorder.TOP, impV.normalTTF, Color.white);
 		namePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		namePanel.setBackground(new Color(0, 0, 0, 0));
 		namePanel.setBorder(bf);
 		namePanel.setBounds(10, 180, impV.window_width - 90, 70);
 		
 		/*	랭크 패널	*/
-		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "랭크", TitledBorder.CENTER, TitledBorder.TOP, impV.normalKostar, Color.red);
+		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "랭크", TitledBorder.CENTER, TitledBorder.TOP, impV.normalTTF, Color.red);
 		rankPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		rankPanel.setBackground(new Color(0, 0, 0, 0));
 		rankPanel.setBorder(bf);
 		rankPanel.setBounds(impV.window_width - 80, 180, 70, 70);
 		
 		/*	쉴드 패널	*/
-		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "방어력 / 쉴드 / 체력", TitledBorder.LEFT, TitledBorder.TOP, impV.normalKostar, Color.white);
+		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "방어력 / 쉴드 / 체력", TitledBorder.LEFT, TitledBorder.TOP, impV.normalTTF, Color.white);
 		shieldPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		shieldPanel.setBackground(new Color(0, 0, 0, 0));
 		shieldPanel.setBorder(bf);
 		shieldPanel.setBounds(10, 260, impV.window_width - 20, 70);
 		
 		/*	임무 조건 패널	*/
-		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "임무 조건", TitledBorder.LEFT, TitledBorder.TOP, impV.normalKostar, Color.white);
+		bf = BorderFactory.createTitledBorder(new LineBorder(lineColor, 1), "임무 조건", TitledBorder.LEFT, TitledBorder.TOP, impV.normalTTF, Color.white);
 		minCutPanel.setLayout(null);
 		minCutPanel.setBackground(new Color(0, 0, 0, 0));
 		minCutPanel.setBorder(bf);
@@ -135,7 +133,7 @@ public class MissionOniWindow extends JFrame {
 		minFPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		minFPanel.setBackground(new Color(0, 0, 0, 0));
 		minFPanel.setBounds(5, 30, impV.window_width - 25, 30);
-		minFPanel.add(impV.lv1("권장 유닛: "));
+		minFPanel.add(impV.lvL("1", "normal", "권장 유닛: "));
 		minSPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		minSPanel.setBackground(new Color(0, 0, 0, 0));
 		minSPanel.setBounds(5, 60, impV.window_width - 25, 30);
@@ -143,13 +141,13 @@ public class MissionOniWindow extends JFrame {
 		minTPanel.setBackground(new Color(0, 0, 0, 0));
 		minTPanel.setBounds(5, 120, impV.window_width - 25, 70);
 		if(name != "쿄우가이 [S]" && name != "루이 [D]")
-			minSPanel.add(impV.lv1("강화 수치: "));
+			minSPanel.add(impV.lvL("1", "normal", "강화 수치: "));
 		else {
 			minSPanel.add(impV.customText("주의!", Color.red, 20));
 			minSPanel.setBounds(5, 150, impV.window_width - 25, 30);
 			minTPanel.setBounds(5, 90, impV.window_width - 25, 70);
 		}
-		minTPanel.add(impV.lvZ("Tip: "));
+		minTPanel.add(impV.lvL("Z", "normal", "Tip: "));
 		minCutPanel.add(minFPanel);
 		minCutPanel.add(minSPanel);
 		minCutPanel.add(minTPanel);
@@ -168,14 +166,14 @@ public class MissionOniWindow extends JFrame {
 			shieldPanel.add(impV.customText("11", new Color(245, 207, 186), 20));
 			shieldPanel.add(impV.customText(" / ", Color.white, 20));
 			shieldPanel.add(impV.customText("2,700", Color.green, 20));
-			minFPanel.add(impV.lv2("2레벨 x 2"));
-			minSPanel.add(impV.lv2("2레벨"));
-			minSPanel.add(impV.lv1("2강화"));
+			minFPanel.add(impV.lvL("2", "normal", "2레벨 x 2"));
+			minSPanel.add(impV.lvL("2", "normal", "2레벨"));
+			minSPanel.add(impV.lvL("1", "normal", "2강화"));
 			if(difficulty == "노말")
-				minTPanel.add(impV.lvZ("2레벨 1개로도 가능하다."));
+				minTPanel.add(impV.lvL("Z", "normal", "2레벨 1개로도 가능하다."));
 			else {
-				minTPanel.add(impV.lvZ("2레벨 1개로도 가능하지만"));
-				minTPanel.add(impV.lvZ("컨트롤에 적응한 후에 권장한다."));
+				minTPanel.add(impV.lvL("Z", "normal", "2레벨 1개로도 가능하지만"));
+				minTPanel.add(impV.lvL("Z", "normal", "컨트롤에 적응한 후에 권장한다."));
 			}
 			break;
 		case "손 오니 [W]":
@@ -188,21 +186,21 @@ public class MissionOniWindow extends JFrame {
 			shieldPanel.add(impV.customText(" / ", Color.white, 20));
 			shieldPanel.add(impV.customText("9,000", Color.green, 20));
 			if(difficulty == "노말") {
-				minFPanel.add(impV.lv2("2레벨 x 5"));
-				minSPanel.add(impV.lv2("2레벨"));
-				minSPanel.add(impV.lv1("2강화"));
-				minTPanel.add(impV.lvZ("("));
+				minFPanel.add(impV.lvL("2", "normal", "2레벨 x 5"));
+				minSPanel.add(impV.lvL("2", "normal", "2레벨"));
+				minSPanel.add(impV.lvL("1", "normal", "2강화"));
+				minTPanel.add(impV.lvL("Z", "normal", "("));
 				minTPanel.add(impV.customText("업적", Color.red, 20));
-				minTPanel.add(impV.lvZ(")유대나 ("));
+				minTPanel.add(impV.lvL("Z", "normal", ")유대나 ("));
 				minTPanel.add(impV.customText("업적", Color.red, 20));
-				minTPanel.add(impV.lvZ(")오니를 포기"));
-				minTPanel.add(impV.lvZ("하는 결단력이 길러지는 오니다"));
+				minTPanel.add(impV.lvL("Z", "normal", ")오니를 포기"));
+				minTPanel.add(impV.lvL("Z", "normal", "하는 결단력이 길러지는 오니다"));
 			} else {
-				minFPanel.add(impV.lv2("2레벨 x 6"));
-				minSPanel.add(impV.lv2("2레벨"));
-				minSPanel.add(impV.lv1("2강화"));
-				minTPanel.add(impV.lvZ("만약 카나오가 없다면 임무를"));
-				minTPanel.add(impV.lvZ("소환하고 한바퀴 돌린 후에 잡는다."));
+				minFPanel.add(impV.lvL("2", "normal", "2레벨 x 6"));
+				minSPanel.add(impV.lvL("2", "normal", "2레벨"));
+				minSPanel.add(impV.lvL("1", "normal", "2강화"));
+				minTPanel.add(impV.lvL("Z", "normal", "만약 카나오가 없다면 임무를"));
+				minTPanel.add(impV.lvL("Z", "normal", "소환하고 한바퀴 돌린 후에 잡는다."));
 			}
 			break;
 		case "늪 오니 [E]":
@@ -230,18 +228,18 @@ public class MissionOniWindow extends JFrame {
 			shieldPanel.add(impV.customText(" / ", Color.white, 20));
 			shieldPanel.add(impV.customText("22,000", Color.green, 20));
 			
-			minFPanel.add(impV.lvH("H사콘지"));
-			minFPanel.add(impV.lv1(" 또는 "));
-			minFPanel.add(impV.lvH("H지고로"));
-			minFfPanel.add(impV.lv1("히든이 안나올시: "));
-			minFfPanel.add(impV.lv3("3레벨 x 1"));
-			minSPanel.add(impV.lvH("H"));
-			minSPanel.add(impV.lv1("일시 전집중호흡 강화"));
-			minSsPanel.add(impV.lv3("                3"));
-			minSsPanel.add(impV.lv1("레벨 일시 "));
-			minSsPanel.add(impV.lv3("3레벨"));
-			minSsPanel.add(impV.lv1("5강화"));
-			minTPanel.add(impV.lvZ("Q, W, E 임무는 꼭 먹어야한다."));
+			minFPanel.add(impV.lvL("H", "normal", "H사콘지"));
+			minFPanel.add(impV.lvL("1", "normal", " 또는 "));
+			minFPanel.add(impV.lvL("H", "normal", "H지고로"));
+			minFfPanel.add(impV.lvL("1", "normal", "히든이 안나올시: "));
+			minFfPanel.add(impV.lvL("3", "normal", "3레벨 x 1"));
+			minSPanel.add(impV.lvL("H", "normal", "H"));
+			minSPanel.add(impV.lvL("1", "normal", "일시 전집중호흡 강화"));
+			minSsPanel.add(impV.lvL("3", "normal", "                3"));
+			minSsPanel.add(impV.lvL("1", "normal", "레벨 일시 "));
+			minSsPanel.add(impV.lvL("3", "normal", "3레벨"));
+			minSsPanel.add(impV.lvL("1", "normal", "5강화"));
+			minTPanel.add(impV.lvL("Z", "normal", "Q, W, E 임무는 꼭 먹어야한다."));
 			break;
 		case "스사마루 [A]":
 			roundLabel.setText("25라운드부터 가능합니다");
@@ -253,13 +251,13 @@ public class MissionOniWindow extends JFrame {
 			shieldPanel.add(impV.customText(" / ", Color.white, 20));
 			shieldPanel.add(impV.customText("85,000", Color.green, 20));
 
-			minFPanel.add(impV.lvH("H x 1"));
-			minFPanel.add(impV.lv1(" + "));
-			minFPanel.add(impV.lv3("3레벨 x 1"));
-			minSPanel.add(impV.lv3("3레벨"));
-			minSPanel.add(impV.lv1("최소 3강화 이상"));
-			minTPanel.add(impV.lvZ("25라운드를 기점으로 강화는"));
-			minTPanel.add(impV.lvZ("전집중호흡에만 투자 한다."));
+			minFPanel.add(impV.lvL("H", "normal", "H x 1"));
+			minFPanel.add(impV.lvL("1", "normal", " + "));
+			minFPanel.add(impV.lvL("3", "normal", "3레벨 x 1"));
+			minSPanel.add(impV.lvL("3", "normal", "3레벨"));
+			minSPanel.add(impV.lvL("1", "normal", "최소 3강화 이상"));
+			minTPanel.add(impV.lvL("Z", "normal", "25라운드를 기점으로 강화는"));
+			minTPanel.add(impV.lvL("Z", "normal", "전집중호흡에만 투자 한다."));
 			break;
 		case "쿄우가이 [S]":
 			roundLabel.setText("30라운드부터 가능합니다");
@@ -271,16 +269,16 @@ public class MissionOniWindow extends JFrame {
 			shieldPanel.add(impV.customText(" / ", Color.white, 20));
 			shieldPanel.add(impV.customText("210,000", Color.green, 20));
 			
-			minFPanel.add(impV.lvX("X"));
-			minFPanel.add(impV.lv1("또는"));
-			minFPanel.add(impV.lv4("4레벨"));
-			minFPanel.add(impV.lv1(" x 1"));
-			minFPanel.add(impV.lv1("+"));
-			minFPanel.add(impV.lvH("H x 1"));
-			minTPanel.add(impV.lvZ("X탄지로, X무이치로, X미츠리"));
-			minTPanel.add(impV.lvZ("X기유는 정중앙에서 홀드 추천"));
-			minSPanel.add(impV.lv4("4레벨 카가야"));
-			minSPanel.add(impV.lv1("는 불가능"));
+			minFPanel.add(impV.lvL("X", "normal", "X"));
+			minFPanel.add(impV.lvL("1", "normal", "또는"));
+			minFPanel.add(impV.lvL("4", "normal", "4레벨"));
+			minFPanel.add(impV.lvL("1", "normal", " x 1"));
+			minFPanel.add(impV.lvL("1", "normal", "+"));
+			minFPanel.add(impV.lvL("H", "normal", "H x 1"));
+			minTPanel.add(impV.lvL("Z", "normal", "X탄지로, X무이치로, X미츠리"));
+			minTPanel.add(impV.lvL("Z", "normal", "X기유는 정중앙에서 홀드 추천"));
+			minSPanel.add(impV.lvL("4", "normal", "4레벨 카가야"));
+			minSPanel.add(impV.lvL("1", "normal", "는 불가능"));
 			break;
 		case "루이 [D]":
 			roundLabel.setText("45라운드부터 가능합니다");
@@ -292,44 +290,16 @@ public class MissionOniWindow extends JFrame {
 			shieldPanel.add(impV.customText(" / ", Color.white, 20));
 			shieldPanel.add(impV.customText("8,000,000", Color.green, 20));
 			
-			minFPanel.add(impV.lvX("X"));
-			minFPanel.add(impV.lv1(" 또는"));
-			minFPanel.add(impV.lv4("4레벨"));
-			minFPanel.add(impV.lv1("합해서 x 3"));
-			minTPanel.add(impV.lvZ("X탄지로, X무이치로, X미츠리"));
-			minTPanel.add(impV.lvZ("X기유는 정중앙에서 홀드 추천"));
-			minSPanel.add(impV.lv4("4레벨 카가야"));
-			minSPanel.add(impV.lv1("는 히든 취급"));
+			minFPanel.add(impV.lvL("X", "normal", "X"));
+			minFPanel.add(impV.lvL("1", "normal", " 또는"));
+			minFPanel.add(impV.lvL("4", "normal", "4레벨"));
+			minFPanel.add(impV.lvL("1", "normal", "합해서 x 3"));
+			minTPanel.add(impV.lvL("Z", "normal", "X탄지로, X무이치로, X미츠리"));
+			minTPanel.add(impV.lvL("Z", "normal", "X기유는 정중앙에서 홀드 추천"));
+			minSPanel.add(impV.lvL("4", "normal", "4레벨 카가야"));
+			minSPanel.add(impV.lvL("1", "normal", "는 히든 취급"));
 			break;
 		}
-		
-		/* 뒤로가기 버튼 */
-		backButton.setText("뒤로가기");							// 글씨 적용
-		backButton.setFont(new Font("Kostar", Font.PLAIN, 18));	// 폰트 적용
-		backButton.setBackground(new Color(0, 0, 0, 0));		// 배경색
-		backButton.setForeground(Color.GREEN);					// 글씨색
-		backButton.setFocusPainted(false);						// 선택 됐을 때 생기는 테두리 없애기
-		backButton.setFocusable(false);
-		backButton.setPreferredSize(new Dimension(200, 30));	// 크기 설정
-		backButton.setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));	// 테두리
-		backButton.setBounds(80, impV.window_height - 55, 200, 30);
-
-		/* 뒤로가기 버튼 기능 구현 */
-		backButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new MissionSelectWindow(difficulty);
-				dispose();
-			}
-		});
-		
-		/*	버튼 마우스 인식	*/
-		backButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
-			}
-		});
 		
 		mainPanel.add(difficultyPanel);
 		mainPanel.add(oniLabel);
@@ -340,9 +310,6 @@ public class MissionOniWindow extends JFrame {
 		mainPanel.add(backButton);
 		add(mainPanel);
 		
-		setAlwaysOnTop(true); // 항상 위에 보이기
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 윈도우 종료시 javax도 종료
-
 		//350, 600
 		// 가로 세로 길이 지정 및 보이기
 		setSize(impV.window_width, impV.window_height);
