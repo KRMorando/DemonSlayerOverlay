@@ -21,8 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class CombinationSelectWindow extends JFrame {
-	ImportentValue impV = new ImportentValue();
-
 	private JPanel mainPanel, buttonPanel;
 	private JLabel titleLabel, explainLabel;
 	private JButton backButton;

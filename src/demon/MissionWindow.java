@@ -17,8 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class MissionWindow extends JFrame {
-	ImportentValue impV = new ImportentValue();
-	
 	private JPanel mainPanel, buttonPanel;
 	private JLabel titleLabel;
 	private JButton btn[], backButton;

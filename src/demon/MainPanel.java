@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class MainPanel extends JPanel {
-	ImportentValue impV = new ImportentValue();
+	impV impV = new impV();
 	
 	public MainPanel() {
 		setLayout(null);								// null ·¹ÀÌ¾Æ¿ô

@@ -22,8 +22,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class MissionOniWindow extends JFrame {
-	ImportentValue impV = new ImportentValue();
-	
 	private JPanel mainPanel, difficultyPanel, namePanel, rankPanel, shieldPanel, minCutPanel, minFPanel, minSPanel, minTPanel;
 	private JLabel oniLabel, roundLabel, leftLabel, rightLabel, difficultyLabel;
 	private JButton backButton;

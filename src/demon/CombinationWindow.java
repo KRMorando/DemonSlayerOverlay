@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class CombinationWindow extends JFrame {
-	ImportentValue impV = new ImportentValue();
+	impV impV = new impV();
 
 	private JPanel mainPanel, buttonPanel;
 	private JLabel titleLabel;

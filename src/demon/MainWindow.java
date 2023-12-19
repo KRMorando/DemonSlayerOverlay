@@ -24,8 +24,6 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class MainWindow extends JFrame {
-	ImportentValue impV = new ImportentValue();
-
 	private GridBagLayout gbl;
 	private JPanel mainPanel;
 	private JLabel madeLabel;

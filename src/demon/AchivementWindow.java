@@ -27,8 +27,6 @@ public class AchivementWindow extends JFrame {
 	private JButton[] btn;
 	private JButton backButton;
 
-	ImportentValue impV = new ImportentValue(); // 임폴 밸류 추가 객체
-
 	private String[] buttonName = {	"하급", "중급", "상급",
 									"유대", "오니", "나비",
 									"사격", "형제", "사랑",

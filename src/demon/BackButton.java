@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class BackButton extends JButton {
-	ImportentValue impV = new ImportentValue();
 	int width = 190;
 	int height = 30;
 	

@@ -20,7 +20,7 @@ import javax.swing.border.LineBorder;
 
 public class DemonStarOverlay extends JFrame {
 	VersionCheck vsC = new VersionCheck();
-	ImportentValue impV = new ImportentValue();
+	impV impV = new impV();
 	
 	JPanel panel;
 	JLabel label1, label2;

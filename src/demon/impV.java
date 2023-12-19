@@ -13,11 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ImportentValue {
+public final class impV {
 	// V.VYYMMDD
 	protected static final String Version = "1.0231106";
 	
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 화면 크기 구하기
+	static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 화면 크기 구하기
 	
 	/* 창 가로, 세로 크기 */
 	protected static final int window_width = 350;
@@ -47,11 +47,11 @@ public class ImportentValue {
 	protected static JFrame activeContainer, sideContainer;
 	protected static JButton hideButton;
 
-	protected ImportentValue() {
+	protected impV() {
 		backColor = new Color(0, 0, 0, gamma);
 	}
 	
-	protected void FrameSetting(JFrame frame) {
+	protected static void FrameSetting(JFrame frame) {
 		/*	메인 프레임	*/
         frame.setUndecorated(true);								//테두리 삭제
         frame.setResizable(false);								//크기 조절 여부
@@ -61,7 +61,7 @@ public class ImportentValue {
 	}
 	
 	/*	커스텀	*/
-	protected JLabel customText(String str, Color color, int size) {
+	protected static JLabel customText(String str, Color color, int size) {
 		JLabel valueLabel = new JLabel();
 		
 		valueLabel.setText(str);
@@ -75,7 +75,7 @@ public class ImportentValue {
 	}
 	
 	/*	+	*/
-	protected JLabel Plus() {
+	protected static JLabel Plus() {
 		JLabel valueLabel = new JLabel();
 		
 		valueLabel.setText("+");
@@ -88,7 +88,7 @@ public class ImportentValue {
 	}
 	
 	/*	+	*/
-	protected JLabel sPlus() {
+	protected static JLabel sPlus() {
 		JLabel valueLabel = new JLabel();
 		
 		valueLabel.setText("+");
@@ -100,7 +100,7 @@ public class ImportentValue {
 	}
 	
 	/*	lvL	*/
-	protected JLabel lvL(String level, String size, String str) {
+	protected static JLabel lvL(String level, String size, String str) {
 		JLabel valueLabel = new JLabel();
 		
 		valueLabel.setText(str);

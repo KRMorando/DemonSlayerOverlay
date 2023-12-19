@@ -15,8 +15,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class AchivementSideWindow extends JFrame implements Runnable {
-	ImportentValue impV = new ImportentValue();
-
 	private JPanel mainPanel, levelPanel, explainPanel, rewardPanel;
 	private URL url;
 	private String imgUrl[] = {	"achive/under_lamp1.png",

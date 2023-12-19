@@ -16,7 +16,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class CombinationSideWindow extends JFrame implements Runnable {
-	ImportentValue impV = new ImportentValue();
 	private JPanel mainPanel, levelPanel, explainPanel;
 	private JPanel[] lvPanel = {new JPanel(), new JPanel(), new JPanel()};
 //									3		/		2		/	1

@@ -28,8 +28,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class SettingWindow extends JFrame {
-	ImportentValue impV = new ImportentValue();	//ÀÓÆú ¹ë·ù Ãß°¡ °´Ã¼
-	
 	private GridBagLayout gbl;
 	private JPanel mainPanel, durationPanel, gammaPanel;
 	private JLabel titleLabel, durationText;
