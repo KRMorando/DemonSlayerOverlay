@@ -70,7 +70,7 @@ public class MissionOniWindow extends JFrame {
 		leftLabel.setForeground(Color.cyan);
 		leftLabel.setSize(30, 40);
 		
-		if(difficulty == "하드") {
+		if(difficulty.equals("하드")) {
 			difficultyLabel.setText("Hard");
 			difficultyLabel.setForeground(Color.red);
 		} else {
@@ -97,7 +97,7 @@ public class MissionOniWindow extends JFrame {
 		
 		/*	오니 사진	*/
 		oniLabel = makeImg(name, location);
-		if(name == "스사마루 [A]")
+		if(name.equals("스사마루 [A]"))
 			oniLabel.setLocation((int)((350 - oniLabel.getWidth()) / 2), 40);
 		else
 			oniLabel.setLocation((int)((350 - oniLabel.getWidth()) / 2), 20);
@@ -140,7 +140,7 @@ public class MissionOniWindow extends JFrame {
 		minTPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		minTPanel.setBackground(new Color(0, 0, 0, 0));
 		minTPanel.setBounds(5, 120, impV.window_width - 25, 70);
-		if(name != "쿄우가이 [S]" && name != "루이 [D]")
+		if(!(name.equals("쿄우가이 [S]") && !(name.equals("루이 [D]"))))
 			minSPanel.add(impV.lvL("1", "normal", "강화 수치: "));
 		else {
 			minSPanel.add(impV.customText("주의!", Color.red, 20));
@@ -169,7 +169,7 @@ public class MissionOniWindow extends JFrame {
 			minFPanel.add(impV.lvL("2", "normal", "2레벨 x 2"));
 			minSPanel.add(impV.lvL("2", "normal", "2레벨"));
 			minSPanel.add(impV.lvL("1", "normal", "2강화"));
-			if(difficulty == "노말")
+			if(difficulty.equals("노말"))
 				minTPanel.add(impV.lvL("Z", "normal", "2레벨 1개로도 가능하다."));
 			else {
 				minTPanel.add(impV.lvL("Z", "normal", "2레벨 1개로도 가능하지만"));
@@ -185,7 +185,7 @@ public class MissionOniWindow extends JFrame {
 			shieldPanel.add(impV.customText("36", new Color(245, 207, 186), 20));
 			shieldPanel.add(impV.customText(" / ", Color.white, 20));
 			shieldPanel.add(impV.customText("9,000", Color.green, 20));
-			if(difficulty == "노말") {
+			if(difficulty.equals("노말")) {
 				minFPanel.add(impV.lvL("2", "normal", "2레벨 x 5"));
 				minSPanel.add(impV.lvL("2", "normal", "2레벨"));
 				minSPanel.add(impV.lvL("1", "normal", "2강화"));
@@ -299,6 +299,26 @@ public class MissionOniWindow extends JFrame {
 			minSPanel.add(impV.lvL("4", "normal", "4레벨 카가야"));
 			minSPanel.add(impV.lvL("1", "normal", "는 히든 취급"));
 			break;
+			
+		case "엔무 [Z]":
+			roundLabel.setText("56라운드부터 가능합니다");
+			namePanel.add(impV.customText("엔무", Color.white, 20));
+			rankPanel.add(impV.customText("Z", Color.red, 25));
+			shieldPanel.add(impV.customText("255", new Color(151, 151, 219), 20));
+			shieldPanel.add(impV.customText(" / ", Color.white, 20));
+			shieldPanel.add(impV.customText("6,000", new Color(245, 207, 186), 20));
+			shieldPanel.add(impV.customText(" / ", Color.white, 20));
+			shieldPanel.add(impV.customText("8,000,000", Color.green, 20));
+			
+			minFPanel.add(impV.lvL("X", "normal", "X"));
+			minFPanel.add(impV.lvL("1", "normal", " 또는"));
+			minFPanel.add(impV.lvL("4", "normal", "4레벨"));
+			minFPanel.add(impV.lvL("1", "normal", "합해서 x 3"));
+			minTPanel.add(impV.lvL("Z", "normal", "X탄지로, X무이치로, X미츠리"));
+			minTPanel.add(impV.lvL("Z", "normal", "X기유는 정중앙에서 홀드 추천"));
+			minSPanel.add(impV.lvL("4", "normal", "4레벨 카가야"));
+			minSPanel.add(impV.lvL("1", "normal", "는 히든 취급"));
+			break;
 		}
 		
 		mainPanel.add(difficultyPanel);
@@ -321,7 +341,7 @@ public class MissionOniWindow extends JFrame {
 		int width = 160;
 		int height = 160;
 		
-		if(name == "스사마루 [A]" ) {
+		if(name.equals("스사마루 [A]")) {
 			width = 130;
 			height = 130;
 		}

@@ -59,18 +59,22 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 									"H/chaH_Kanae.png",
 									"H/chaH_Makomo.png",
 									"H/chaH_Sabito.png" },
+					
+					EHLocation = {	"EH/chaEH_Hotaru.png"},
 
-					XLocation = {	"H/chaX_Tanjiro.png",
-									"H/chaX_Inosuke.png",
-									"H/chaX_Zenitsu.png",
-									"H/chaX_Giyu.png",
-									"H/chaX_Tengen.png",
-									"H/chaX_Mitsuri.png",
-									"H/chaX_Muichiro.png" },
+					XLocation = {	"X/chaX_Tanjiro.png",
+									"X/chaX_Inosuke.png",
+									"X/chaX_Zenitsu.png",
+									"X/chaX_Giyu.png",
+									"X/chaX_Tengen.png",
+									"X/chaX_Mitsuri.png",
+									"X/chaX_Muichiro.png" },
 
 					ZLocation = {	"Z/chaZ_Kanao.png",
 									"Z/chaZ_Nezuko.png",
-									"Z/chaZ_Kyojuro.png" };
+									"Z/chaZ_Kyojuro.png" },
+	
+					SZLocation = {	"SZ/chaSZ_Tanjiro.png"};
 	
 	public CombinationSideWindow(String name) {
 		this.name = name;
@@ -116,21 +120,25 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 			lvPanel[i].setLayout(null);
 			lvPanel[i].setBackground(new Color(0, 0, 0, 0));
 			lvPanel[i].setSize(impV.sideWindow_width - 24, 120);
-			if(name != "ÄìÁê·Î") {
-				if(i == 0)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
-				else if(i == 1)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.TwoColor, 1), "Lv2", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.TwoColor);
-				else
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.OneColor);
-			} else {
+			if(name.equals("ÄìÁê·Î")) {
 				if(i == 0)
 					bf = BorderFactory.createTitledBorder(new LineBorder(impV.FourColor, 1), "Lv4", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.FourColor);
 				else if(i == 1)
 					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
-				else
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.OneColor);
+			} else if(name.equals("Ä«¸¶µµ ÅºÁö·Î")) {
+				if(i == 0)
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.XColor, 1), "LvX", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.XColor);
+				else if(i == 1)
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
+			} else {
+				if(i == 0)
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
+				else if(i == 1)
+					bf = BorderFactory.createTitledBorder(new LineBorder(impV.TwoColor, 1), "Lv2", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.TwoColor);
 			}
+			
+			if(i == 2)
+				bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.OneColor);
 			lvPanel[i].setBorder(bf);
 			CustomLayout(explainPanel, lvPanel[i], 0, i);
 		}
@@ -187,6 +195,15 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 			CustomLayout(lvPanel[0], makeCard("3", "¹«ÀÌÄ¡·Îx1", ThreeLocation[1]), 1, 0);
 			CustomLayout(lvPanel[1], makeCard("2", "Á¨ÀÌÃ÷x1", TwoLocation[4]), 1, 0);
 			CustomLayout(lvPanel[2], makeCard("1", "ÅºÁö·Îx2", OneLocation[3]), 1, 0);
+			break;
+			
+		/*======EH======*/
+		case "È£Å¸·ç":
+			CustomLayout(lvPanel[0], makeCard("3", "¹«ÀÌÄ¡·Îx1", ThreeLocation[1]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "Á¨ÀÌÃ÷x1", TwoLocation[4]), 0, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "°Õ¾ßx1", TwoLocation[0]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "ÀÌ³ë½ºÄÉx1", TwoLocation[1]), 2, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "ÅºÁö·Îx1", OneLocation[3]), 1, 0);
 			break;
 			
 		/*======X=======*/
@@ -263,6 +280,12 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 			CustomLayout2(lvPanel[1], makeCard("3", "¹ÌÃ÷¸®x1", ThreeLocation[0]), 1, 0);
 			CustomLayout(lvPanel[2], makeCard("1", "ÅºÁö·Îx2", OneLocation[3]), 1, 0);
 			break;
+			
+		/*=======SZ======*/
+		case "Ä«¸¶µµ ÅºÁö·Î":
+			CustomLayout(lvPanel[0], makeCard("X", "ÅºÁö·Îx1", XLocation[0]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("3", "ALL Lv3x2", ThreeLocation[2]), 1, 0);
+			break;
 		}
 		
 		mainPanel.add(levelPanel);
@@ -312,20 +335,24 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 40, width, 35);	// x, y, width, height
-		if(rank == "1")
+		if(rank.equals("1"))
 			imgText.setForeground(impV.OneColor);	//±Û¾¾ »ö»ó
-		else if(rank == "2")
+		else if(rank.equals("2"))
 			imgText.setForeground(impV.TwoColor);	//±Û¾¾ »ö»ó
-		else if(rank == "3")
+		else if(rank.equals("3"))
 			imgText.setForeground(impV.ThreeColor);	//±Û¾¾ »ö»ó
-		else if(rank == "4")
+		else if(rank.equals("4"))
 			imgText.setForeground(impV.FourColor);	//±Û¾¾ »ö»ó
-		else if(rank == "H")
+		else if(rank.equals("H"))
 			imgText.setForeground(impV.HColor);		//±Û¾¾ »ö»ó
-		else if(rank == "X")
+		else if(rank.equals("EH"))
+			imgText.setForeground(impV.EHColor);	//±Û¾¾ »ö»ó
+		else if(rank.equals("X"))
 			imgText.setForeground(impV.XColor);		//±Û¾¾ »ö»ó
-		else
+		else if(rank.equals("Z"))
 			imgText.setForeground(impV.ZColor);		//±Û¾¾ »ö»ó
+		else
+			imgText.setForeground(impV.SZColor);	//±Û¾¾ »ö»ó
 		
 		cardPanel.add(imgLabel);
 		cardPanel.add(imgText);
@@ -334,7 +361,7 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 	}
 	
 	protected void CustomLayout(JPanel panel, Component c, int sequence, int floor) {
-		c.setLocation((12 * (1 + sequence)) + (100 * sequence), (5 * (1 + floor)) + (120 * floor));
+		c.setLocation((10 * (1 + sequence)) + (100 * sequence), (5 * (1 + floor)) + (120 * floor));
 		//				¿©¹é °è»ê					¹Ú½º °è»ê		x / y
 		panel.add(c);
 	}

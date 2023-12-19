@@ -22,7 +22,7 @@ public class ImportentValue {
 	/* 창 가로, 세로 크기 */
 	protected static final int window_width = 350;
 	protected static final int window_height = 600;
-	protected static final int sideWindow_width = 350;
+	protected static final int sideWindow_width = 360;
 	protected static final int sideWindow_height = 180;
 	protected static int gamma = 200;
 	protected static int cooltime = 3;
@@ -38,8 +38,10 @@ public class ImportentValue {
 	protected static final Color ThreeColor = Color.green;
 	protected static final Color FourColor = Color.cyan;
 	protected static final Color HColor = new Color(255, 40, 0);
+	protected static final Color EHColor = new Color(38, 105, 0);
 	protected static final Color XColor = new Color(50, 150, 255);
 	protected static final Color ZColor = Color.orange;
+	protected static final Color SZColor = Color.red;
 	
 	/*	컴포넌트 저장	*/
 	protected static JFrame activeContainer, sideContainer;
@@ -105,7 +107,7 @@ public class ImportentValue {
 		valueLabel.setBackground(new Color(0, 0, 0, 0));
 		valueLabel.setHorizontalAlignment(JLabel.RIGHT);
 
-		if(size == "normal")
+		if(size.equals("normal"))
 			valueLabel.setFont(normalTTF);
 		else
 			valueLabel.setFont(smallTTF);
@@ -129,6 +131,10 @@ public class ImportentValue {
 			
 		case "H":
 			valueLabel.setForeground(HColor);
+			break;
+			
+		case "EH":
+			valueLabel.setForeground(EHColor);
 			break;
 			
 		case "X":

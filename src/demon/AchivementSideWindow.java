@@ -74,6 +74,7 @@ public class AchivementSideWindow extends JFrame implements Runnable {
 		levelPanel.add(impV.lvL("3", "normal", "Lv3 "));
 		levelPanel.add(impV.lvL("4", "normal", "Lv4 "));
 		levelPanel.add(impV.lvL("H", "normal", "LvH "));
+		levelPanel.add(impV.lvL("EH", "normal", "LvEH "));
 		levelPanel.add(impV.lvL("X", "normal", "LvX "));
 		levelPanel.add(impV.lvL("Z", "normal", "LvZ"));
 
@@ -298,11 +299,15 @@ public class AchivementSideWindow extends JFrame implements Runnable {
 			break;
 
 		case 25:
-			// ´ëÀåÀåÀÌ
+			// µµ°ø¸¶À»
 			explainPanel.add(impV.lvL("X", "normal", "¹«ÀÌÄ¡·Îx1"));
 			explainPanel.add(impV.Plus());
 			explainPanel.add(impV.lvL("X", "normal", "¹ÌÃ÷¸®x1"));
-			rewardPanel.add(impV.lvL("2", "normal", "Lv2 ·£´ý½Ã¹Îx1"));
+			explainPanel.add(impV.Plus());
+			explainPanel.add(impV.lvL("X", "normal", "°Õ¾ßx1"));
+			explainPanel.add(impV.Plus());
+			explainPanel.add(impV.lvL("EH", "normal", "È£Å¸·çx1"));
+			rewardPanel.add(impV.lvL("3", "normal", "Lv3 ·£´ý½Ã¹Îx1"));
 			rewardPanel.add(impV.lvL("H", "normal", "/"));
 			rewardPanel.add(impV.lvL("1", "normal", "Lv1 ·£´ý½Ã¹Îx2"));
 			break;

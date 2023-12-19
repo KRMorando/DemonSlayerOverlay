@@ -26,6 +26,9 @@ public class CombinationSelectWindow extends JFrame {
 	private JPanel mainPanel, buttonPanel;
 	private JLabel titleLabel, explainLabel;
 	private JButton backButton;
+	
+	private int width = 100;
+	private int height = 140;
 
 	private String[] HLocation = {	"H/chaH_Sakonji.png",
 									"H/chaH_Jigoro.png",
@@ -33,6 +36,8 @@ public class CombinationSelectWindow extends JFrame {
 									"H/chaH_Kanae.png",
 									"H/chaH_Makomo.png",
 									"H/chaH_Sabito.png" },
+					
+					EHLocation = {	"EH/chaEH_Hotaru.png"},
 
 					XLocation = {	"X/chaX_Tanjiro.png",
 									"X/chaX_Inosuke.png",
@@ -44,7 +49,9 @@ public class CombinationSelectWindow extends JFrame {
 
 					ZLocation = {	"Z/chaZ_Kanao.png",
 									"Z/chaZ_Nezuko.png",
-									"Z/chaZ_Kyojuro.png" };
+									"Z/chaZ_Kyojuro.png" },
+					
+					SZLocation = {	"SZ/chaSZ_Tanjiro.png"};
 
 	public CombinationSelectWindow(String id) {
 		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
@@ -87,7 +94,7 @@ public class CombinationSelectWindow extends JFrame {
 		/* 350, 600	*/
 
 		/* makeCard(등급, 이름, 사진 경로) */
-		/* H / X / Z 순서 */
+		/* H / EH / X / Z / SZ 순서 */
 		
 		switch (id) {
 		case "H": 
@@ -100,6 +107,13 @@ public class CombinationSelectWindow extends JFrame {
 			CustomLayout(makeCard("H", "카나에", HLocation[3]), 0, 1);
 			CustomLayout(makeCard("H", "마코모", HLocation[4]), 1, 1);
 			CustomLayout(makeCard("H", "사비토", HLocation[5]), 2, 1);
+			break;
+			
+		case "EH":
+			titleLabel.setText("EH");
+			titleLabel.setForeground(impV.EHColor);
+			
+			CustomLayout(makeCard("EH", "호타루", EHLocation[0]), 1, 0);
 			break;
 			
 		case "X":
@@ -123,6 +137,15 @@ public class CombinationSelectWindow extends JFrame {
 			CustomLayout(makeCard("Z", "네즈코", ZLocation[1]), 1, 1);
 			CustomLayout(makeCard("Z", "쿄쥬로", ZLocation[2]), 2, 1);
 			break;
+			
+		case "SZ": 
+			titleLabel.setText("SZ"); 				// 내용
+			titleLabel.setForeground(impV.SZColor);	// 글 색상
+			
+			Component card = makeCard("SZ", "카마도 탄지로", SZLocation[0]);
+			card.setLocation((impV.window_width - width) / 2, (impV.window_height - height) / 4);
+			buttonPanel.add(card);
+			break;
 		}
 
 		mainPanel.add(titleLabel);
@@ -138,8 +161,10 @@ public class CombinationSelectWindow extends JFrame {
 	}
 
 	protected Component makeCard(String rank, String name, String location) {
-		int width = 100;
-		int height = 140;
+		if(name.equals("카마도 탄지로")) {
+			width = 150;
+			height = 190;
+		}
 		
 		URL url = this.getClass().getClassLoader().getResource(location);
 		ImageIcon icon = new ImageIcon(url), updateIcon;
@@ -153,7 +178,7 @@ public class CombinationSelectWindow extends JFrame {
 		JButton mainButton = new JButton();
 		
 		cardPanel.setLayout(null);
-		cardPanel.setBackground(new Color(0, 0, 0, 0));	//배경 투명
+		cardPanel.setBackground(new Color(0, 0, 0, 0));		//배경 투명
 		cardPanel.setSize(width, height);					//width, height
 
 		imgLabel.setText("");
@@ -166,12 +191,16 @@ public class CombinationSelectWindow extends JFrame {
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 25, width, 25);		// x, y, width, height
-		if(rank == "H")
+		if(rank.equals("H"))
 			imgText.setForeground(impV.HColor);	// 글씨 색상
-		else if(rank == "X")
+		else if(rank.equals("EH"))
+			imgText.setForeground(impV.EHColor); // 글씨 색상
+		else if(rank.equals("X"))
 			imgText.setForeground(impV.XColor);	// 글씨 색상
-		else
+		else if(rank.equals("Z"))
 			imgText.setForeground(impV.ZColor);	// 글씨 색상
+		else
+			imgText.setForeground(impV.SZColor); // 글씨 색상
 		
 		mainButton.setText("");
 		mainButton.setBackground(new Color(0, 0, 0, 0));	//배경 색
@@ -203,7 +232,7 @@ public class CombinationSelectWindow extends JFrame {
 	}
 	
 	protected void CustomLayout(Component c, int sequence, int floor) {
-		c.setLocation((12 * (1 + sequence)) + (100 * sequence), (5 * (1 + floor)) + (140 * floor));
+		c.setLocation((12 * (1 + sequence)) + (width * sequence), (5 * (1 + floor)) + (height * floor));
 		//				여백 계산					박스 계산		x / y
 		buttonPanel.add(c);
 	}

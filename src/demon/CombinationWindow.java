@@ -24,7 +24,7 @@ public class CombinationWindow extends JFrame {
 	private JLabel titleLabel;
 	private JButton btn[], backButton;
 	
-	private String buttonName[] = {"H", "X", "Z"};
+	private String buttonName[] = {"H", "EH", "X", "Z", "SZ"};
 
 	public CombinationWindow() {
 		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
@@ -32,7 +32,7 @@ public class CombinationWindow extends JFrame {
 		mainPanel = new MainPanel();
 		buttonPanel = new JPanel();
 		titleLabel = new JLabel();
-		btn = new JButton[3];
+		btn = new JButton[buttonName.length];
 		backButton = new BackButton(this, "Main");
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -90,7 +90,7 @@ public class CombinationWindow extends JFrame {
 				break;
 				
 			case 1:
-				btn[i].setForeground(impV.XColor);		//글씨 색상
+				btn[i].setForeground(impV.EHColor);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -101,11 +101,33 @@ public class CombinationWindow extends JFrame {
 				break;
 				
 			case 2:
-				btn[i].setForeground(impV.ZColor);		//글씨 색상
+				btn[i].setForeground(impV.XColor);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new CombinationSelectWindow(buttonName[2]);
+						dispose();
+					}
+				});
+				break;
+				
+			case 3:
+				btn[i].setForeground(impV.ZColor);		//글씨 색상
+				btn[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						new CombinationSelectWindow(buttonName[3]);
+						dispose();
+					}
+				});
+				break;
+				
+			case 4:
+				btn[i].setForeground(impV.SZColor);		//글씨 색상
+				btn[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						new CombinationSelectWindow(buttonName[4]);
 						dispose();
 					}
 				});

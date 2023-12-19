@@ -27,7 +27,7 @@ public class MissionSelectWindow extends JFrame {
 	private JPanel mainPanel, buttonPanel;
 	private JLabel titleLabel;
 	private JButton backButton;
-	private ArrayList<OniInfo> oniInfoArray = new ArrayList<OniInfo>();
+	private ArrayList<OniInfo> oniInfoArray = new ArrayList<>();
 	
 	private String difficulty;
 	private String OLocation[] = {	"Oni/D.png",
@@ -35,7 +35,8 @@ public class MissionSelectWindow extends JFrame {
 									"Oni/B.png",
 									"Oni/A.png",
 									"Oni/S.png",
-									"Oni/X.png" };
+									"Oni/X.png",
+									"Oni/Z.png"};
 	
 	public MissionSelectWindow(String difficulty) {
 		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
@@ -71,7 +72,7 @@ public class MissionSelectWindow extends JFrame {
 		/* 350, 600	*/
 		/* makeCard(등급, 이름, 사진 경로) */
 		
-		if(difficulty == "노말")
+		if(difficulty.equals("노말"))
 			titleLabel.setForeground(Color.white);	// 노말 (하얀색)
 		else 
 			titleLabel.setForeground(Color.red);	// 하드 (빨간색)
@@ -82,6 +83,7 @@ public class MissionSelectWindow extends JFrame {
 		CustomLayout(makeCard("A", "스사마루 [A]", OLocation[3]), 0, 1);
 		CustomLayout(makeCard("S", "쿄우가이 [S]", OLocation[4]), 1, 1);
 		CustomLayout(makeCard("X", "루이 [D]", OLocation[5]), 2, 1);
+		CustomLayout(makeCard("Z", "엔무 [Z]", OLocation[6]), 0, 2);
 
 		/*	===============================================
 			============	버튼 기능 노가다	===============
@@ -183,6 +185,22 @@ public class MissionSelectWindow extends JFrame {
 				repaint();
 			}
 		});
+		/*======================6번째======================*/
+		/* 버튼 기능 추가	*/
+		oniInfoArray.get(6).button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MissionOniWindow(difficulty, oniInfoArray.get(6).name, oniInfoArray.get(6).location, oniInfoArray.get(6).color);
+				dispose();
+			}
+		});
+		/*	버튼 마우스 인식	*/
+		oniInfoArray.get(6).button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
+				repaint();
+			}
+		});
 		/*	===============================================
 			============	버튼 기능 노가다 끝	===============
 			===============================================	*/
@@ -205,7 +223,7 @@ public class MissionSelectWindow extends JFrame {
 		URL url = this.getClass().getClassLoader().getResource(location);
 		ImageIcon icon = new ImageIcon(url), updateIcon;
 		Image img = icon.getImage(), updateImg;
-		if(rank == "A")
+		if(rank.equals("A"))
 			updateImg = img.getScaledInstance(width - 20, height - 45, Image.SCALE_SMOOTH);
 		else
 			updateImg = img.getScaledInstance(width, height - 15, Image.SCALE_SMOOTH);
@@ -222,7 +240,7 @@ public class MissionSelectWindow extends JFrame {
 		cardPanel.setSize(width, height);					//width, height
 
 		imgLabel.setBackground(new Color(0, 0, 0, 0));		// 배경 투명
-		if(rank == "A")
+		if(rank.equals("A"))
 			imgLabel.setBounds(10, 15, width - 20, height - 45); 		// x, y, width, height
 		else
 			imgLabel.setBounds(0, 0, width, height - 15); 		// x, y, width, height
@@ -233,15 +251,15 @@ public class MissionSelectWindow extends JFrame {
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 25, width, 25);		// x, y, width, height
-		if(rank == "D")
+		if(rank.equals("D"))
 			imgText.setForeground(Color.white);	// 글씨 색상
-		else if(rank == "C")
+		else if(rank.equals("C"))
 			imgText.setForeground(new Color(50, 150, 255));	// 글씨 색상
-		else if(rank == "B")
+		else if(rank.equals("B"))
 			imgText.setForeground(Color.green);	// 글씨 색상
-		else if(rank == "A")
+		else if(rank.equals("A"))
 			imgText.setForeground(Color.orange);// 글씨 색상
-		else if(rank == "S")
+		else if(rank.equals("S"))
 			imgText.setForeground(Color.cyan);// 글씨 색상
 		else
 			imgText.setForeground(Color.red);	// 글씨 색상
