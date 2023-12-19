@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class MainPanel extends JPanel {
-	impV impV = new impV();
-	
 	public MainPanel() {
 		setLayout(null);								// null 레이아웃
 		setBackground(impV.backColor); 					// 메인 패널 색

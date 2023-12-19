@@ -13,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
 
 public class HideWindow extends JFrame {
-	impV impV = new impV();
-	
 	private JButton hideButton;
 	private final int btn_width = 60, btn_height = 60;
 	private boolean isOn = true;

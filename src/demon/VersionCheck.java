@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class VersionCheck {
-	impV impV = new impV();
 	private static final String fileLink = "https://www.dropbox.com/scl/fi/y6qrmktt66wzgiit8mo6h/DemonSlayerOverlayVersion.txt?rlkey=8svv9qjngy4geqrn246d64cif&dl=1";
 	
 	private static final String folder = "C:\\DemonOverlay";
