@@ -187,11 +187,10 @@ public class MissionOniWindow extends JFrame {
 				minFPanel.add(impV.lvL("2", "normal", "2레벨 x 5"));
 				minSPanel.add(impV.lvL("2", "normal", "2레벨"));
 				minSPanel.add(impV.lvL("1", "normal", "2강화"));
-				minTPanel.add(impV.lvL("Z", "normal", "("));
-				minTPanel.add(impV.customText("업적", Color.red, 20));
-				minTPanel.add(impV.lvL("Z", "normal", ")유대나 ("));
-				minTPanel.add(impV.customText("업적", Color.red, 20));
-				minTPanel.add(impV.lvL("Z", "normal", ")오니를 포기"));
+				minTPanel.add(impV.customText("(업적)", Color.red, 20));
+				minTPanel.add(impV.lvL("Z", "normal", "유대나"));
+				minTPanel.add(impV.customText("(업적)", Color.red, 20));
+				minTPanel.add(impV.lvL("Z", "normal", "오니를 포기"));
 				minTPanel.add(impV.lvL("Z", "normal", "하는 결단력이 길러지는 오니다"));
 			} else {
 				minFPanel.add(impV.lvL("2", "normal", "2레벨 x 6"));
