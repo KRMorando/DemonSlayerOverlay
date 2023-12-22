@@ -3,13 +3,11 @@ package demon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +22,7 @@ public class MissionWindow extends JFrame {
 	private String buttonName[] = {"노말", "하드"};
 	
 	public MissionWindow() {
-		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
+		SystemManager.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		mainPanel = new MainPanel();
 		buttonPanel = new JPanel();
@@ -39,20 +37,20 @@ public class MissionWindow extends JFrame {
 		});
 		
 		/*	메인 프레임	*/
-		impV.FrameSetting(this);
+		SystemManager.FrameSetting(this);
 		
 		/*	타이틀 라벨	*/
 		titleLabel.setText("난이도");
-		titleLabel.setFont(impV.titleTTF);
+		titleLabel.setFont(SystemManager.titleTTF);
 		titleLabel.setBackground(new Color(0, 0, 0, 0));							//라벨 배경색
 		titleLabel.setForeground(Color.GREEN);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
-		titleLabel.setBounds(0, 0, impV.window_width, 120);							//라벨 위치 및 크기 (x, y, width, height)
+		titleLabel.setBounds(0, 0, SystemManager.window_width, 120);						//라벨 위치 및 크기 (x, y, width, height)
 		
 		/* 버튼 패널 */
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 30));
 		buttonPanel.setBackground(new Color(0, 0, 0, 0)); 							// 버튼 패널 색
-		buttonPanel.setBounds(0, 100, impV.window_width, impV.window_height - 40);
+		buttonPanel.setBounds(0, 100, SystemManager.window_width, SystemManager.window_height - 40);
 		
 		/*	버튼	*/
 		for(int i = 0; i < btn.length; i++) {
@@ -60,7 +58,7 @@ public class MissionWindow extends JFrame {
 			
 			/* 전체 적용 */
 			btn[i].setText(buttonName[i]);							//텍스트 설정
-			btn[i].setFont(impV.normalTTF);						//폰트 적용
+			btn[i].setFont(SystemManager.normalTTF);						//폰트 적용
 			btn[i].setBackground(new Color(0, 0, 0)); 				//배경색
 			btn[i].setPreferredSize(new Dimension(200, 40)); 		//크기 설정
 			btn[i].setBorder(new LineBorder(Color.red, 1, true));	//테두리
@@ -108,8 +106,8 @@ public class MissionWindow extends JFrame {
 		add(mainPanel);
 		
 		// 가로 세로 길이 지정 및 보이기
-		setSize(impV.window_width, impV.window_height);
-		setLocation(impV.screenSize.width - impV.window_width - 10, 50);
+		setSize(SystemManager.window_width, SystemManager.window_height);
+		setLocation(SystemManager.screenSize.width - SystemManager.window_width - 10, 50);
 		setVisible(true);
 	}
 }

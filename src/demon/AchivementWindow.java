@@ -3,7 +3,6 @@ package demon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,12 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 public class AchivementWindow extends JFrame {
 	private GridBagLayout gbl = new GridBagLayout();
@@ -42,7 +39,7 @@ public class AchivementWindow extends JFrame {
 	private int gridY = 0; // 상하
 
 	public AchivementWindow() {
-		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
+		SystemManager.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		btn = new JButton[29];
 		mainPanel = new MainPanel();
@@ -56,21 +53,21 @@ public class AchivementWindow extends JFrame {
 		});
 
 		/*	메인 프레임	*/
-        impV.FrameSetting(this);
+        SystemManager.FrameSetting(this);
 		
 		/* 제목 */
 		titleLabel = new JLabel();
 		titleLabel.setText("업적");
-		titleLabel.setFont(impV.titleTTF);
+		titleLabel.setFont(SystemManager.titleTTF);
 		titleLabel.setBackground(new Color(0, 0, 0, 0));
 		titleLabel.setForeground(Color.GREEN);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
-		titleLabel.setBounds(0, 0, impV.window_width, 120);
+		titleLabel.setBounds(0, 0, SystemManager.window_width, 120);
 		
 		/* 버튼 패널 */
 		buttonPanel.setLayout(gbl);
 		buttonPanel.setBackground(new Color(0, 0, 0, 0)); // 버튼 패널 색
-		buttonPanel.setBounds(0, 30, impV.window_width, impV.window_height - 40);
+		buttonPanel.setBounds(0, 30, SystemManager.window_width, SystemManager.window_height - 40);
 
 		/* 버튼 추가 */
 		for (int i = 0; i < btn.length; i++) {
@@ -78,7 +75,7 @@ public class AchivementWindow extends JFrame {
 
 			/* 전체 적용 */
 			btn[i].setText(buttonName[i]); // 글씨 적용
-			btn[i].setFont(impV.normalTTF); // 폰트 적용
+			btn[i].setFont(SystemManager.normalTTF); // 폰트 적용
 			btn[i].setBackground(new Color(0, 0, 0, 0)); // 배경색
 			btn[i].setPreferredSize(new Dimension(115, 40)); // 크기 설정
 			btn[i].setBorderPainted(false); // 테두리 없음
@@ -422,8 +419,8 @@ public class AchivementWindow extends JFrame {
 		add(mainPanel);
 
 		// 가로 세로 길이 지정 및 보이기
-		setSize(impV.window_width, impV.window_height);
-		setLocation(impV.screenSize.width - impV.window_width - 10, 50);
+		setSize(SystemManager.window_width, SystemManager.window_height);
+		setLocation(SystemManager.screenSize.width - SystemManager.window_width - 10, 50);
 		setVisible(true);
 	}
 

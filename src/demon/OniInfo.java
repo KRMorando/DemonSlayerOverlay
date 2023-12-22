@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 
 public class OniInfo {
+	// 오니 정보
 	JButton button;
 	String rank, name, location;
 	Color color;

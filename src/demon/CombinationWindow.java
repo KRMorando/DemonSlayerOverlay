@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +24,7 @@ public class CombinationWindow extends JFrame {
 	private String buttonName[] = {"H", "EH", "X", "Z", "SZ"};
 
 	public CombinationWindow() {
-		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
+		SystemManager.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		mainPanel = new MainPanel();
 		buttonPanel = new JPanel();
@@ -40,27 +39,27 @@ public class CombinationWindow extends JFrame {
 		});
 		
 		/*	메인 프레임	*/
-		impV.FrameSetting(this);
+	SystemManager.FrameSetting(this);
 		
 		/*	타이틀 라벨	*/
 		titleLabel.setText("조합");
-		titleLabel.setFont(impV.titleTTF);
+		titleLabel.setFont(SystemManager.titleTTF);
 		titleLabel.setBackground(new Color(0, 0, 0, 0));								//라벨 배경색
 		titleLabel.setForeground(Color.GREEN);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
-		titleLabel.setBounds(0, 0, impV.window_width, 120);								//라벨 위치 및 크기 (x, y, width, height)
+		titleLabel.setBounds(0, 0, SystemManager.window_width, 120);								//라벨 위치 및 크기 (x, y, width, height)
 		
 		/* 버튼 패널 */
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		buttonPanel.setBackground(new Color(0, 0, 0, 0)); // 버튼 패널 색
-		buttonPanel.setBounds(0, 100, impV.window_width, impV.window_height - 40);
+		buttonPanel.setBounds(0, 100, SystemManager.window_width, SystemManager.window_height - 40);
 		
 		for(int i = 0; i < btn.length; i++) {
 			btn[i] = new JButton();
 			
 			/* 전체 적용 */
 			btn[i].setText(buttonName[i]);							//텍스트 설정
-			btn[i].setFont(new Font(impV.ttf, Font.PLAIN, 35));		//폰트 적용
+			btn[i].setFont(new Font(SystemManager.ttf, Font.PLAIN, 35));		//폰트 적용
 			btn[i].setBackground(new Color(0, 0, 0)); 			//배경색
 			btn[i].setPreferredSize(new Dimension(100, 100)); 		//크기 설정
 			btn[i].setBorder(new LineBorder(Color.red, 1, true));	//테두리
@@ -77,7 +76,7 @@ public class CombinationWindow extends JFrame {
 			/*	버튼 기능	*/
 			switch(i) {
 			case 0:
-				btn[i].setForeground(impV.HColor);		//글씨 색상
+				btn[i].setForeground(SystemManager.HColor);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -88,7 +87,7 @@ public class CombinationWindow extends JFrame {
 				break;
 				
 			case 1:
-				btn[i].setForeground(impV.EHColor);		//글씨 색상
+				btn[i].setForeground(SystemManager.EHColor);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -99,7 +98,7 @@ public class CombinationWindow extends JFrame {
 				break;
 				
 			case 2:
-				btn[i].setForeground(impV.XColor);		//글씨 색상
+				btn[i].setForeground(SystemManager.XColor);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -110,7 +109,7 @@ public class CombinationWindow extends JFrame {
 				break;
 				
 			case 3:
-				btn[i].setForeground(impV.ZColor);		//글씨 색상
+				btn[i].setForeground(SystemManager.ZColor);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -121,7 +120,7 @@ public class CombinationWindow extends JFrame {
 				break;
 				
 			case 4:
-				btn[i].setForeground(impV.SZColor);		//글씨 색상
+				btn[i].setForeground(SystemManager.SZColor);		//글씨 색상
 				btn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -141,8 +140,8 @@ public class CombinationWindow extends JFrame {
 		add(mainPanel);
 		
 		// 가로 세로 길이 지정 및 보이기
-		setSize(impV.window_width, impV.window_height);
-		setLocation(impV.screenSize.width - impV.window_width - 10, 50);
+		setSize(SystemManager.window_width, SystemManager.window_height);
+		setLocation(SystemManager.screenSize.width - SystemManager.window_width - 10, 50);
 		setVisible(true);
 	}
 	

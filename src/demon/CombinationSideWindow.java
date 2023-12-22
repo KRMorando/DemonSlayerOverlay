@@ -28,53 +28,6 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 	//350, 180 + 250
 	//350, 430
 	
-	private String[] OneLocation = {"1/cha1_Aoi.png",
-									"1/cha1_Cube.png",
-									"1/cha1_Nezuko.png",
-									"1/cha1_Tanjiro.png",
-									"1/cha1_Yusiro.png"},
-
-					TwoLocation = {	"2/cha2_Genya.png",
-									"2/cha2_Inosuke.png",
-									"2/cha2_Kanao.png",
-									"2/cha2_Murata.png",
-									"2/cha2_Zenitsu.png"},
-
-					ThreeLocation = {"3/cha3_Mitsuri.png",
-									 "3/cha3_Muichiro.png",
-									 "3/cha3_obanai.png",
-									 "3/cha3_Sanemi.png",
-									 "3/cha3_Tengen.png" },
-					
-					FourLocation = {"4/cha4_Giyu.png",
-									"4/cha4_Gyomei.png",
-									"4/cha4_Kagaya.png",
-									"4/cha4_Kyojuro.png",
-									"4/cha4_Shinobu.png" },
-	
-					HLocation = {	"H/chaH_Sakonji.png",
-									"H/chaH_Jigoro.png",
-									"H/chaH_Tamayo.png",
-									"H/chaH_Kanae.png",
-									"H/chaH_Makomo.png",
-									"H/chaH_Sabito.png" },
-					
-					EHLocation = {	"EH/chaEH_Hotaru.png"},
-
-					XLocation = {	"X/chaX_Tanjiro.png",
-									"X/chaX_Inosuke.png",
-									"X/chaX_Zenitsu.png",
-									"X/chaX_Giyu.png",
-									"X/chaX_Tengen.png",
-									"X/chaX_Mitsuri.png",
-									"X/chaX_Muichiro.png" },
-
-					ZLocation = {	"Z/chaZ_Kanao.png",
-									"Z/chaZ_Nezuko.png",
-									"Z/chaZ_Kyojuro.png" },
-	
-					SZLocation = {	"SZ/chaSZ_Tanjiro.png"};
-	
 	public CombinationSideWindow(String name) {
 		this.name = name;
 	}
@@ -88,8 +41,8 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 			}
 		}
 
-		runningThread = Thread.currentThread(); 				// 실행된 스레드 객체 얻기
-		impV.sideContainer = this;	// 현재 컨테이너 객체를 최근으로 등록
+		runningThread = Thread.currentThread(); // 실행된 스레드 객체 얻기
+		SystemManager.sideContainer = this;		// 현재 컨테이너 객체를 최근으로 등록
 		
 		mainPanel = new MainPanel();
 		levelPanel = new JPanel();
@@ -97,59 +50,59 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		titleLabel = new JLabel();
 
 		/* 메인 프레임 */
-		impV.FrameSetting(this);
+		SystemManager.FrameSetting(this);
 		
 		/* 메인 패널 	*/
-		mainPanel.setBounds(0, 0, impV.sideWindow_width, impV.sideWindow_height + under_size);	//x, y, 가로, 세로
+		mainPanel.setBounds(0, 0, SystemManager.sideWindow_width, SystemManager.sideWindow_height + under_size);	//x, y, 가로, 세로
 		
 		/* 레벨 패널 */
 		levelPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); // FlowLayout(중앙 배치)
 		levelPanel.setBackground(new Color(0, 0, 0, 0)); // 배경색
-		levelPanel.setBounds(0, 10, impV.sideWindow_width, impV.sideWindow_height - 50); // 크기
+		levelPanel.setBounds(0, 10, SystemManager.sideWindow_width, SystemManager.sideWindow_height - 50); // 크기
 
 		/* 설명 패널 */
 		//350, 380
 		explainPanel.setLayout(null);
 		explainPanel.setBackground(new Color(0, 0, 0, 0));
-		explainPanel.setBounds(0, 40, impV.sideWindow_width, impV.sideWindow_height + under_size - 50);
+		explainPanel.setBounds(0, 40, SystemManager.sideWindow_width, SystemManager.sideWindow_height + under_size - 50);
 		
 		/* 조합식 레벨 패널	*/
 		//326, 120
 		for(int i = 0; i < lvPanel.length; i++) {
 			lvPanel[i].setLayout(null);
 			lvPanel[i].setBackground(new Color(0, 0, 0, 0));
-			lvPanel[i].setSize(impV.sideWindow_width - 24, 120);
+			lvPanel[i].setSize(SystemManager.sideWindow_width - 24, 120);
 			if(name.equals("쿄쥬로")) {
 				if(i == 0)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.FourColor, 1), "Lv4", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.FourColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(SystemManager.FourColor, 1), "Lv4", TitledBorder.LEFT, TitledBorder.TOP, SystemManager.smallTTF, SystemManager.FourColor);
 				else if(i == 1)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(SystemManager.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, SystemManager.smallTTF, SystemManager.ThreeColor);
 			} else if(name.equals("카마도 탄지로")) {
 				if(i == 0)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.XColor, 1), "LvX", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.XColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(SystemManager.XColor, 1), "LvX", TitledBorder.LEFT, TitledBorder.TOP, SystemManager.smallTTF, SystemManager.XColor);
 				else if(i == 1)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(SystemManager.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, SystemManager.smallTTF, SystemManager.ThreeColor);
 			} else {
 				if(i == 0)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.ThreeColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(SystemManager.ThreeColor, 1), "Lv3", TitledBorder.LEFT, TitledBorder.TOP, SystemManager.smallTTF, SystemManager.ThreeColor);
 				else if(i == 1)
-					bf = BorderFactory.createTitledBorder(new LineBorder(impV.TwoColor, 1), "Lv2", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.TwoColor);
+					bf = BorderFactory.createTitledBorder(new LineBorder(SystemManager.TwoColor, 1), "Lv2", TitledBorder.LEFT, TitledBorder.TOP, SystemManager.smallTTF, SystemManager.TwoColor);
 			}
 			
 			if(i == 2)
-				bf = BorderFactory.createTitledBorder(new LineBorder(impV.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, impV.smallTTF, impV.OneColor);
+				bf = BorderFactory.createTitledBorder(new LineBorder(SystemManager.OneColor, 1), "Lv1", TitledBorder.LEFT, TitledBorder.TOP, SystemManager.smallTTF, SystemManager.OneColor);
 			lvPanel[i].setBorder(bf);
 			CustomLayout(explainPanel, lvPanel[i], 0, i);
 		}
 		
 		/* 레벨 패널 추가 */
-		levelPanel.add(impV.lvL("1", "normal", "Lv1 "));
-		levelPanel.add(impV.lvL("2", "normal", "Lv2 "));
-		levelPanel.add(impV.lvL("3", "normal", "Lv3 "));
-		levelPanel.add(impV.lvL("4", "normal", "Lv4 "));
-		levelPanel.add(impV.lvL("H", "normal", "LvH "));
-		levelPanel.add(impV.lvL("X", "normal", "LvX "));
-		levelPanel.add(impV.lvL("Z", "normal", "LvZ"));
+		levelPanel.add(SystemManager.lvL("1", "normal", "Lv1 "));
+		levelPanel.add(SystemManager.lvL("2", "normal", "Lv2 "));
+		levelPanel.add(SystemManager.lvL("3", "normal", "Lv3 "));
+		levelPanel.add(SystemManager.lvL("4", "normal", "Lv4 "));
+		levelPanel.add(SystemManager.lvL("H", "normal", "LvH "));
+		levelPanel.add(SystemManager.lvL("X", "normal", "LvX "));
+		levelPanel.add(SystemManager.lvL("Z", "normal", "LvZ"));
 		
 		/* makeCard(등급, 이름, 사진 경로) */
 		/* CustomLayout(컴포넌트, n번째 (0~2), 층(1~)	*/
@@ -158,132 +111,141 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		switch(name) {
 		/*======H=======*/
 		case "사콘지":
-			CustomLayout(lvPanel[1], makeCard("2", "무라타x2", TwoLocation[3]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", OneLocation[1]), 0, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", OneLocation[0]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", OneLocation[3]), 2, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "무라타x2", SystemManager.TwoLocation[3]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", SystemManager.OneLocation[1]), 0, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", SystemManager.OneLocation[0]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", SystemManager.OneLocation[3]), 2, 0);
 			break;
 			
 		case "지고로":
-			CustomLayout(lvPanel[1], makeCard("2", "젠이츠x2", TwoLocation[4]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", OneLocation[1]), 0, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "유시로x2", OneLocation[4]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", OneLocation[2]), 2, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "젠이츠x2", SystemManager.TwoLocation[4]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", SystemManager.OneLocation[1]), 0, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "유시로x2", SystemManager.OneLocation[4]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", SystemManager.OneLocation[2]), 2, 0);
 			break;
 			
 		case "타마요":
-			CustomLayout(lvPanel[1], makeCard("2", "카나오x2", TwoLocation[2]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", OneLocation[0]), 0, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "유시로x2", OneLocation[4]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", OneLocation[2]), 2, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "카나오x2", SystemManager.TwoLocation[2]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", SystemManager.OneLocation[0]), 0, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "유시로x2", SystemManager.OneLocation[4]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", SystemManager.OneLocation[2]), 2, 0);
 			break;
 			
 		case "카나에":
-			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", ThreeLocation[1]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "카나오x1", TwoLocation[2]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", OneLocation[3]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", SystemManager.ThreeLocation[1]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "카나오x1", SystemManager.TwoLocation[2]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", SystemManager.OneLocation[3]), 1, 0);
 			break;
 			
 		case "마코모":
-			CustomLayout(lvPanel[0], makeCard("3", "미츠리x1", ThreeLocation[0]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "겐야x1", TwoLocation[0]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", OneLocation[0]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "미츠리x1", SystemManager.ThreeLocation[0]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "겐야x1", SystemManager.TwoLocation[0]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", SystemManager.OneLocation[0]), 1, 0);
 			break;
 			
 		case "사비토":
-			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", ThreeLocation[1]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "젠이츠x1", TwoLocation[4]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", OneLocation[3]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", SystemManager.ThreeLocation[1]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "젠이츠x1", SystemManager.TwoLocation[4]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", SystemManager.OneLocation[3]), 1, 0);
 			break;
 			
 		/*======EH======*/
 		case "호타루":
-			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", ThreeLocation[1]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "젠이츠x1", TwoLocation[4]), 0, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "겐야x1", TwoLocation[0]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "이노스케x1", TwoLocation[1]), 2, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "탄지로x1", OneLocation[3]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", SystemManager.ThreeLocation[1]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "젠이츠x1", SystemManager.TwoLocation[4]), 0, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "겐야x1", SystemManager.TwoLocation[0]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "이노스케x1", SystemManager.TwoLocation[1]), 2, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "탄지로x1", SystemManager.OneLocation[3]), 1, 0);
 			break;
 			
 		/*======X=======*/
 		case "탄지로":
-			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", ThreeLocation[1]), 0, 0);
-			CustomLayout(lvPanel[0], makeCard("3", "오바나이x1", ThreeLocation[2]), 1, 0);
-			CustomLayout(lvPanel[0], makeCard("3", "텐겐x1", ThreeLocation[4]), 2, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "무라타x2", TwoLocation[3]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", OneLocation[3]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", SystemManager.ThreeLocation[1]), 0, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "오바나이x1", SystemManager.ThreeLocation[2]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "텐겐x1", SystemManager.ThreeLocation[4]), 2, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "무라타x2", SystemManager.TwoLocation[3]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", SystemManager.OneLocation[3]), 1, 0);
 			break;
 			
 		case "이노스케":
-			CustomLayout2(lvPanel[0], makeCard("3", "사네미x2", ThreeLocation[3]), 0, 0);
-			CustomLayout2(lvPanel[0], makeCard("3", "텐겐x1", ThreeLocation[4]), 1, 0);
-			CustomLayout2(lvPanel[1], makeCard("2", "겐야x2", TwoLocation[0]), 0, 0);
-			CustomLayout2(lvPanel[1], makeCard("2", "이노스케x1", TwoLocation[1]), 1, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "사네미x2", SystemManager.ThreeLocation[3]), 0, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "텐겐x1", SystemManager.ThreeLocation[4]), 1, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "겐야x2", SystemManager.TwoLocation[0]), 0, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "이노스케x1", SystemManager.TwoLocation[1]), 1, 0);
 			break;
 			
 		case "젠이츠":
-			CustomLayout2(lvPanel[0], makeCard("3", "미츠리x2", ThreeLocation[0]), 0, 0);
-			CustomLayout2(lvPanel[0], makeCard("3", "사네미x1", ThreeLocation[3]), 1, 0);
-			CustomLayout2(lvPanel[1], makeCard("2", "무라타x2", TwoLocation[3]), 0, 0);
-			CustomLayout2(lvPanel[1], makeCard("2", "젠이츠x1", TwoLocation[4]), 1, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "미츠리x2", SystemManager.ThreeLocation[0]), 0, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "사네미x1", SystemManager.ThreeLocation[3]), 1, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "무라타x2", SystemManager.TwoLocation[3]), 0, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "젠이츠x1", SystemManager.TwoLocation[4]), 1, 0);
 			break;
 			
 		case "기유":
-			CustomLayout2(lvPanel[0], makeCard("3", "오바나이x2", ThreeLocation[2]), 0, 0);
-			CustomLayout2(lvPanel[0], makeCard("3", "사네미x1", ThreeLocation[3]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "이노스케x2", TwoLocation[1]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", OneLocation[1]), 1, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "오바나이x2", SystemManager.ThreeLocation[2]), 0, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "사네미x1", SystemManager.ThreeLocation[3]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "이노스케x2", SystemManager.TwoLocation[1]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", SystemManager.OneLocation[1]), 1, 0);
 			break;
 			
 		case "텐겐":
-			CustomLayout2(lvPanel[0], makeCard("3", "텐겐x2", ThreeLocation[4]), 0, 0);
-			CustomLayout2(lvPanel[0], makeCard("3", "미츠리x1", ThreeLocation[0]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "카나오x2", TwoLocation[2]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", OneLocation[1]), 1, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "텐겐x2", SystemManager.ThreeLocation[4]), 0, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "미츠리x1", SystemManager.ThreeLocation[0]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "카나오x2", SystemManager.TwoLocation[2]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "큐브선배x2", SystemManager.OneLocation[1]), 1, 0);
 			break;
 			
 		case "미츠리":
-			CustomLayout2(lvPanel[0], makeCard("3", "미츠리x1", ThreeLocation[0]), 0, 0);
-			CustomLayout2(lvPanel[0], makeCard("3", "무이치로x1", ThreeLocation[1]), 1, 0);
-			CustomLayout2(lvPanel[1], makeCard("2", "이노스케x2", TwoLocation[1]), 0, 0);
-			CustomLayout2(lvPanel[1], makeCard("2", "젠이츠x1", TwoLocation[4]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", OneLocation[2]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "미츠리x1", SystemManager.ThreeLocation[0]), 0, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "무이치로x1", SystemManager.ThreeLocation[1]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "오바나이x1", SystemManager.ThreeLocation[2]), 2, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "이노스케x1", SystemManager.TwoLocation[1]), 0, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "젠이츠x1", SystemManager.TwoLocation[4]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", SystemManager.OneLocation[2]), 1, 0);
 			break;
 			
 		case "무이치로":
-			CustomLayout2(lvPanel[0], makeCard("3", "무이치로x2", ThreeLocation[1]), 0, 0);
-			CustomLayout2(lvPanel[0], makeCard("3", "미츠리x1", ThreeLocation[0]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "겐야x2", TwoLocation[0]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "유시로x2", OneLocation[4]), 1, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "무이치로x2", SystemManager.ThreeLocation[1]), 0, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "미츠리x1", SystemManager.ThreeLocation[0]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "겐야x2", SystemManager.TwoLocation[0]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "유시로x2", SystemManager.OneLocation[4]), 1, 0);
+			break;
+			
+		case "겐야":
+			CustomLayout2(lvPanel[0], makeCard("3", "사네미x2", SystemManager.ThreeLocation[3]), 0, 0);
+			CustomLayout2(lvPanel[0], makeCard("3", "오바나이x1", SystemManager.ThreeLocation[2]), 1, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "카나오x1", SystemManager.TwoLocation[2]), 0, 0);
+			CustomLayout2(lvPanel[1], makeCard("2", "겐야x1", SystemManager.TwoLocation[0]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "유시로x2", SystemManager.OneLocation[4]), 1, 0);
 			break;
 			
 		/*======Z=======*/
 		case "카나오":
-			CustomLayout(lvPanel[0], makeCard("3", "미츠리x2", ThreeLocation[0]), 0, 0);
-			CustomLayout(lvPanel[0], makeCard("3", "무이치로x2", ThreeLocation[1]), 1, 0);
-			CustomLayout(lvPanel[0], makeCard("3", "오바나이x2", ThreeLocation[2]), 2, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", OneLocation[0]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "미츠리x2", SystemManager.ThreeLocation[0]), 0, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "무이치로x2", SystemManager.ThreeLocation[1]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "오바나이x2", SystemManager.ThreeLocation[2]), 2, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "아오이x2", SystemManager.OneLocation[0]), 1, 0);
 			break;
 			
 		case "네즈코":
-			CustomLayout(lvPanel[0], makeCard("3", "텐겐x2", ThreeLocation[4]), 0, 0);
-			CustomLayout(lvPanel[0], makeCard("3", "무이치로x2", ThreeLocation[1]), 1, 0);
-			CustomLayout(lvPanel[0], makeCard("3", "사네미x1", ThreeLocation[3]), 2, 0);
-			CustomLayout(lvPanel[1], makeCard("2", "카나오x2", TwoLocation[2]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", OneLocation[2]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "텐겐x2", SystemManager.ThreeLocation[4]), 0, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "무이치로x2", SystemManager.ThreeLocation[1]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("3", "사네미x1", SystemManager.ThreeLocation[3]), 2, 0);
+			CustomLayout(lvPanel[1], makeCard("2", "카나오x2", SystemManager.TwoLocation[2]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "네즈코x2", SystemManager.OneLocation[2]), 1, 0);
 			break;
 			
 		case "쿄쥬로":
-			CustomLayout(lvPanel[0], makeCard("4", "쿄쥬로x1", FourLocation[3]), 1, 0);
-			CustomLayout2(lvPanel[1], makeCard("3", "오바나이x2", ThreeLocation[2]), 0, 0);
-			CustomLayout2(lvPanel[1], makeCard("3", "미츠리x1", ThreeLocation[0]), 1, 0);
-			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", OneLocation[3]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("4", "쿄쥬로x1", SystemManager.FourLocation[3]), 1, 0);
+			CustomLayout2(lvPanel[1], makeCard("3", "오바나이x2", SystemManager.ThreeLocation[2]), 0, 0);
+			CustomLayout2(lvPanel[1], makeCard("3", "미츠리x1", SystemManager.ThreeLocation[0]), 1, 0);
+			CustomLayout(lvPanel[2], makeCard("1", "탄지로x2", SystemManager.OneLocation[3]), 1, 0);
 			break;
 			
 		/*=======SZ======*/
 		case "카마도 탄지로":
-			CustomLayout(lvPanel[0], makeCard("X", "탄지로x1", XLocation[0]), 1, 0);
-			CustomLayout(lvPanel[1], makeCard("3", "ALL Lv3x2", ThreeLocation[2]), 1, 0);
+			CustomLayout(lvPanel[0], makeCard("X", "탄지로x1", SystemManager.XLocation[0]), 1, 0);
+			CustomLayout(lvPanel[1], makeCard("3", "ALL Lv3x2", SystemManager.ThreeLocation[2]), 1, 0);
 			break;
 		}
 		
@@ -292,14 +254,14 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		add(mainPanel);
 
 		// 가로 세로 길이 지정 및 보이기
-		setSize(impV.sideWindow_width, impV.sideWindow_height + under_size);
-		setLocation(impV.screenSize.width - impV.window_width - impV.sideWindow_width - 8, 50);
+		setSize(SystemManager.sideWindow_width, SystemManager.sideWindow_height + under_size);
+		setLocation(SystemManager.screenSize.width - SystemManager.window_width - SystemManager.sideWindow_width - 8, 50);
 		setVisible(true);
 		
 		try {
-			Thread.sleep(impV.cooltime * 1000);
+			Thread.sleep(SystemManager.cooltime * 1000);
 			runningThread = null;
-			impV.sideContainer = null;
+			SystemManager.sideContainer = null;
 			dispose();
 		} catch (InterruptedException e) {
 			dispose();
@@ -313,7 +275,7 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 		URL url = this.getClass().getClassLoader().getResource(location);
 		ImageIcon icon = new ImageIcon(url), updateIcon;
 		Image img = icon.getImage();
-		Image updateImg = img.getScaledInstance(width, height - 25, Image.SCALE_SMOOTH);
+		Image updateImg = img.getScaledInstance(width, height - 15, Image.SCALE_SMOOTH);
 		updateIcon = new ImageIcon(updateImg);
 		
 		JPanel cardPanel = new JPanel();
@@ -330,28 +292,28 @@ public class CombinationSideWindow extends JFrame implements Runnable {
 
 		imgText.setText(name); 							// 버튼 이름
 		imgText.setBackground(new Color(0, 0, 0, 0));	// 배경색
-		imgText.setFont(impV.smallTTF); 				// 폰트
+		imgText.setFont(SystemManager.smallTTF); 				// 폰트
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 40, width, 35);	// x, y, width, height
 		if(rank.equals("1"))
-			imgText.setForeground(impV.OneColor);	//글씨 색상
+			imgText.setForeground(SystemManager.OneColor);	//글씨 색상
 		else if(rank.equals("2"))
-			imgText.setForeground(impV.TwoColor);	//글씨 색상
+			imgText.setForeground(SystemManager.TwoColor);	//글씨 색상
 		else if(rank.equals("3"))
-			imgText.setForeground(impV.ThreeColor);	//글씨 색상
+			imgText.setForeground(SystemManager.ThreeColor);//글씨 색상
 		else if(rank.equals("4"))
-			imgText.setForeground(impV.FourColor);	//글씨 색상
+			imgText.setForeground(SystemManager.FourColor);	//글씨 색상
 		else if(rank.equals("H"))
-			imgText.setForeground(impV.HColor);		//글씨 색상
+			imgText.setForeground(SystemManager.HColor);	//글씨 색상
 		else if(rank.equals("EH"))
-			imgText.setForeground(impV.EHColor);	//글씨 색상
+			imgText.setForeground(SystemManager.EHColor);	//글씨 색상
 		else if(rank.equals("X"))
-			imgText.setForeground(impV.XColor);		//글씨 색상
+			imgText.setForeground(SystemManager.XColor);	//글씨 색상
 		else if(rank.equals("Z"))
-			imgText.setForeground(impV.ZColor);		//글씨 색상
+			imgText.setForeground(SystemManager.ZColor);	//글씨 색상
 		else
-			imgText.setForeground(impV.SZColor);	//글씨 색상
+			imgText.setForeground(SystemManager.SZColor);	//글씨 색상
 		
 		cardPanel.add(imgLabel);
 		cardPanel.add(imgText);

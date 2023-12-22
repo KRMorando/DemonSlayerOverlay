@@ -2,7 +2,6 @@ package demon;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,13 +12,11 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 public class MissionSelectWindow extends JFrame {
 	private JPanel mainPanel, buttonPanel;
@@ -37,7 +34,7 @@ public class MissionSelectWindow extends JFrame {
 									"Oni/Z.png"};
 	
 	public MissionSelectWindow(String difficulty) {
-		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
+		SystemManager.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		this.difficulty = difficulty;
 		
@@ -53,19 +50,19 @@ public class MissionSelectWindow extends JFrame {
 		});
 
 		/*	메인 프레임	*/
-		impV.FrameSetting(this);
+		SystemManager.FrameSetting(this);
 		
 		/* 타이틀 라벨	*/
 		titleLabel.setText(difficulty);						// 글자
-		titleLabel.setFont(impV.titleTTF);				// 폰트
+		titleLabel.setFont(SystemManager.titleTTF);				// 폰트
 		titleLabel.setBackground(new Color(0, 0, 0, 0));	// 배경색
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);	// 중앙 정렬
-		titleLabel.setBounds(0, 0, impV.window_width, 100); // x, y, width, height
+		titleLabel.setBounds(0, 0, SystemManager.window_width, 100); // x, y, width, height
 		
 		/* 버튼 패널 	*/
 		buttonPanel.setLayout(null);
 		buttonPanel.setBackground(new Color(0, 0, 0, 0));
-		buttonPanel.setBounds(0, 100, impV.window_width, impV.window_height - 140);
+		buttonPanel.setBounds(0, 100, SystemManager.window_width, SystemManager.window_height - 140);
 		
 		/* 350, 600	*/
 		/* makeCard(등급, 이름, 사진 경로) */
@@ -83,9 +80,18 @@ public class MissionSelectWindow extends JFrame {
 		CustomLayout(makeCard("X", "루이 [D]", OLocation[5]), 2, 1);
 		CustomLayout(makeCard("Z", "엔무 [Z]", OLocation[6]), 0, 2);
 
-		/*	===============================================
-			============	버튼 기능 노가다	===============
-			===============================================	*/
+		/*	=============================================== */
+		/*	===================	버튼 기능	=================== */
+		/*	===============================================	*/
+		for(int i = 0; i < oniInfoArray.size(); i++) {
+			/*	버튼 마우스 인식	*/
+			oniInfoArray.get(i).button.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
+					repaint();
+				}
+			});
+		}
 		
 		/*======================0번째======================*/
 		/* 버튼 기능 추가	*/
@@ -94,13 +100,6 @@ public class MissionSelectWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(0).name, oniInfoArray.get(0).location, oniInfoArray.get(0).color);
 				dispose();
-			}
-		});
-		/*	버튼 마우스 인식	*/
-		oniInfoArray.get(0).button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
 			}
 		});
 		/*======================1번째======================*/
@@ -112,13 +111,6 @@ public class MissionSelectWindow extends JFrame {
 				dispose();
 			}
 		});
-		/*	버튼 마우스 인식	*/
-		oniInfoArray.get(1).button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
-			}
-		});
 		/*======================2번째======================*/
 		/* 버튼 기능 추가	*/
 		oniInfoArray.get(2).button.addActionListener(new ActionListener() {
@@ -126,13 +118,6 @@ public class MissionSelectWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(2).name, oniInfoArray.get(2).location, oniInfoArray.get(2).color);
 				dispose();
-			}
-		});
-		/*	버튼 마우스 인식	*/
-		oniInfoArray.get(2).button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
 			}
 		});
 		/*======================3번째======================*/
@@ -144,13 +129,6 @@ public class MissionSelectWindow extends JFrame {
 				dispose();
 			}
 		});
-		/*	버튼 마우스 인식	*/
-		oniInfoArray.get(3).button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
-			}
-		});
 		/*======================4번째======================*/
 		/* 버튼 기능 추가	*/
 		oniInfoArray.get(4).button.addActionListener(new ActionListener() {
@@ -158,13 +136,6 @@ public class MissionSelectWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(4).name, oniInfoArray.get(4).location, oniInfoArray.get(4).color);
 				dispose();
-			}
-		});
-		/*	버튼 마우스 인식	*/
-		oniInfoArray.get(4).button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
 			}
 		});
 		/*======================5번째======================*/
@@ -176,13 +147,6 @@ public class MissionSelectWindow extends JFrame {
 				dispose();
 			}
 		});
-		/*	버튼 마우스 인식	*/
-		oniInfoArray.get(5).button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
-			}
-		});
 		/*======================6번째======================*/
 		/* 버튼 기능 추가	*/
 		oniInfoArray.get(6).button.addActionListener(new ActionListener() {
@@ -190,13 +154,6 @@ public class MissionSelectWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MissionOniWindow(difficulty, oniInfoArray.get(6).name, oniInfoArray.get(6).location, oniInfoArray.get(6).color);
 				dispose();
-			}
-		});
-		/*	버튼 마우스 인식	*/
-		oniInfoArray.get(6).button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {		//마우스가 영역에 나간 순간
-				repaint();
 			}
 		});
 		/*	===============================================
@@ -209,8 +166,8 @@ public class MissionSelectWindow extends JFrame {
 		add(mainPanel);
 
 		// 가로 세로 길이 지정 및 보이기
-		setSize(impV.window_width, impV.window_height);
-		setLocation(impV.screenSize.width - impV.window_width - 10, 50);
+		setSize(SystemManager.window_width, SystemManager.window_height);
+		setLocation(SystemManager.screenSize.width - SystemManager.window_width - 10, 50);
 		setVisible(true);
 	}
 	
@@ -245,7 +202,7 @@ public class MissionSelectWindow extends JFrame {
 
 		imgText.setText(name); 								// 버튼 이름
 		imgText.setBackground(new Color(0, 0, 0, 0));		// 배경색
-		imgText.setFont(new Font(impV.ttf, Font.PLAIN, 18));// 폰트
+		imgText.setFont(new Font(SystemManager.ttf, Font.PLAIN, 18));// 폰트
 		imgText.setHorizontalAlignment(JLabel.CENTER);
 		imgText.setVerticalAlignment(JLabel.CENTER);
 		imgText.setBounds(0, height - 25, width, 25);		// x, y, width, height

@@ -9,13 +9,13 @@ import javax.swing.border.LineBorder;
 public class MainPanel extends JPanel {
 	public MainPanel() {
 		setLayout(null);								// null 레이아웃
-		setBackground(impV.backColor); 					// 메인 패널 색
+		setBackground(SystemManager.backColor); 		// 메인 패널 색
 		setBorder(new LineBorder(Color.red, 2, true));	// 메인 패널 테두리 색
 	}
 	
 	public MainPanel(GridBagLayout gbl) {
 		setLayout(gbl);									// GridBagLayout 레이아웃
-		setBackground(impV.backColor); 					// 메인 패널 색
+		setBackground(SystemManager.backColor); 		// 메인 패널 색
 		setBorder(new LineBorder(Color.red, 2, true));	// 메인 패널 테두리 색
 	}
 }

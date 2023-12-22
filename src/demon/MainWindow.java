@@ -21,7 +21,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 public class MainWindow extends JFrame {
 	private GridBagLayout gbl;
@@ -29,7 +28,7 @@ public class MainWindow extends JFrame {
 	private JLabel madeLabel;
 
 	public MainWindow() {
-		impV.activeContainer = this;	//현재 활성화된 컨테이너 저장
+		SystemManager.activeContainer = this;	//현재 활성화된 컨테이너 저장
 		
 		JButton[] btn = new JButton[6];
 		String[] buttonName = { "업적", "조합", "임무", "카페", "설정", "종료" };
@@ -38,7 +37,7 @@ public class MainWindow extends JFrame {
 		mainPanel = new MainPanel(gbl);
 
 		/*	메인 프레임	*/
-		impV.FrameSetting(this);
+		SystemManager.FrameSetting(this);
 
 		/*	버튼 생성 및 기능 추가	*/
 		for (int i = 0; i < btn.length; i++) {
@@ -46,7 +45,7 @@ public class MainWindow extends JFrame {
 
 			/* 전체 적용 */
 			btn[i].setText(buttonName[i]); // 글씨 적용
-			btn[i].setFont(impV.normalTTF); // 폰트 적용
+			btn[i].setFont(SystemManager.normalTTF); // 폰트 적용
 			btn[i].setForeground(Color.GREEN); // 글씨 색상 적용
 			btn[i].setBackground(new Color(0, 0, 0));
 			btn[i].setBorder(BorderFactory.createLineBorder(Color.RED, 1, true)); // 테두리 설정
@@ -141,14 +140,14 @@ public class MainWindow extends JFrame {
 
 		madeLabel = new JLabel();
 		madeLabel.setText("Made by Morando");
-		madeLabel.setFont(new Font(impV.ttf, Font.ITALIC, 15));
+		madeLabel.setFont(new Font(SystemManager.ttf, Font.ITALIC, 15));
 		madeLabel.setForeground(Color.GREEN);
 		Insert(gbl, mainPanel, madeLabel, 1, 6, 2, 1);
 
 		add(mainPanel);
 
-		setSize(impV.window_width, impV.window_height);
-		setLocation(impV.screenSize.width - impV.window_width - 10, 50);
+		setSize(SystemManager.window_width, SystemManager.window_height);
+		setLocation(SystemManager.screenSize.width - SystemManager.window_width - 10, 50);
 		setVisible(true);
 	}
 	

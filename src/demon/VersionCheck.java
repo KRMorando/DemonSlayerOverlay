@@ -3,7 +3,6 @@ package demon;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,11 +14,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class VersionCheck {
-	private static final String fileLink = "https://www.dropbox.com/scl/fi/y6qrmktt66wzgiit8mo6h/DemonSlayerOverlayVersion.txt?rlkey=8svv9qjngy4geqrn246d64cif&dl=1";
+	private final String fileLink = "https://www.dropbox.com/scl/fi/y6qrmktt66wzgiit8mo6h/DemonSlayerOverlayVersion.txt?rlkey=8svv9qjngy4geqrn246d64cif&dl=1";
 	
-	private static final String folder = "C:\\DemonOverlay";
-	private static final String outputPath = folder + "\\LastVersion.txt";
-	private static File file = new File(folder);
+	private final String folder = "C:\\DemonOverlay";
+	private final String outputPath = folder + "\\LastVersion.txt";
+	private File file = new File(folder);
 	
     public boolean isUpdated() throws IOException {
     	boolean value = true;
@@ -29,7 +28,7 @@ public class VersionCheck {
     		Stream<String> streamOfString = new BufferedReader(inputStreamReader).lines()) {
             	String lastVersion = streamOfString.collect(Collectors.joining());
             	
-            	if(impV.Version.equals(lastVersion))
+            	if(SystemManager.Version.equals(lastVersion))
             		value = false;
     	}
     	
